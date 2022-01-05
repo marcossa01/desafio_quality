@@ -3,12 +3,8 @@ package com.desafio.desafiotesting.service;
 import com.desafio.desafiotesting.domain.Bairro;
 import com.desafio.desafiotesting.domain.Casa;
 import com.desafio.desafiotesting.domain.Comodo;
-import com.desafio.desafiotesting.domain.dto.CasaDto;
-import com.desafio.desafiotesting.exception.BusinessException;
-import com.desafio.desafiotesting.domain.Bairro;
 import com.desafio.desafiotesting.exception.RepositoryException;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.desafio.desafiotesting.domain.Bairro;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
