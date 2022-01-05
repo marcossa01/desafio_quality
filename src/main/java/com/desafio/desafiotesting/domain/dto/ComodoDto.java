@@ -27,7 +27,7 @@ public class ComodoDto {
     @NotNull(message = "O campo nao pode ser nulo")
     @NotEmpty(message = "O campo nao pode ser vazio")
     @NotBlank(message = "O campo nao pode ser branco")
-    @Max(value = 30, message="O comprimeto do comodo nao pode exceder 30 caracteres")
+    @Size(max = 30, message="O comprimeto do comodo nao pode exceder 30 caracteres")
     @Pattern(regexp = "^[A-Z][a-z]+")
     private final String nome;
 
