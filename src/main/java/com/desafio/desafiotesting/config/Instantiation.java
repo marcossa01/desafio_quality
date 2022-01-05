@@ -1,8 +1,8 @@
 package com.desafio.desafiotesting.config;
 
-import com.marcossa.calculadoraimobiliaria.domain.Casa;
-import com.marcossa.calculadoraimobiliaria.domain.Comodo;
-import com.marcossa.calculadoraimobiliaria.service.CasaService;
+import com.desafio.desafiotesting.domain.Casa;
+import com.desafio.desafiotesting.domain.Comodo;
+import com.desafio.desafiotesting.service.CasaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;

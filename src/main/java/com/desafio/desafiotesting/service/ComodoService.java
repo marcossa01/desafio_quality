@@ -1,6 +1,6 @@
 package com.desafio.desafiotesting.service;
 
-import com.marcossa.calculadoraimobiliaria.domain.Comodo;
+import com.desafio.desafiotesting.domain.Comodo;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

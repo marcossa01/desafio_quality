@@ -1,8 +1,8 @@
 package com.desafio.desafiotesting.resources;
 
-import com.marcossa.calculadoraimobiliaria.domain.Casa;
-import com.marcossa.calculadoraimobiliaria.domain.dto.CasaDto;
-import com.marcossa.calculadoraimobiliaria.service.CasaService;
+import com.desafio.desafiotesting.domain.Casa;
+import com.desafio.desafiotesting.domain.dto.CasaDto;
+import com.desafio.desafiotesting.service.CasaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
