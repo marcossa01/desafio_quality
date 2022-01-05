@@ -6,7 +6,9 @@ import com.desafio.desafiotesting.service.CasaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -56,5 +58,12 @@ public class CasaResource {
     public ResponseEntity<Casa> areaComodos(@PathVariable String nome) {
         Casa casa = casaService.findByNome(nome);
         return ResponseEntity.ok(casa);
+    }
+
+    @PostMapping
+    public ResponseEntity<Void> insert(@RequestBody Casa casa) {
+        casaService.salvarCasa(casa);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{nome}").buildAndExpand(casa.getNome()).toUri();
+        return ResponseEntity.created(uri).build();
     }
 }
