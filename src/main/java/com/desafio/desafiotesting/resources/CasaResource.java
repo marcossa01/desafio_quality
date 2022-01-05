@@ -6,8 +6,10 @@ import com.desafio.desafiotesting.service.CasaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -19,15 +21,13 @@ public class CasaResource {
 
 
     @PostMapping("/cadastrarCasa")
-    public CasaDto cadastrarCasa(@RequestBody @Valid CasaDto casa){
+    public ResponseEntity<CasaDto> cadastrarCasa(@RequestBody @Valid  CasaDto casa, UriComponentsBuilder uriBuilder){
         casaService.salvarCasa(CasaDto.converte(casa));
-        return casa;
-    }
-
-    @PostMapping("/cadastrarBairro")
-    public BairroDto cadastrarCasa(@RequestBody BairroDto bairro){
-        casaService.salvarBairro(BairroDto.converte(bairro));
-        return bairro;
+        URI uri = uriBuilder
+                .path("/{nome}")
+                .buildAndExpand(casa.getNome())
+                .toUri();
+        return ResponseEntity.created(uri).body(casa);
     }
 
     @GetMapping
