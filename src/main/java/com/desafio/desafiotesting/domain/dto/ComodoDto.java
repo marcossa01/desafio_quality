@@ -6,7 +6,6 @@ import lombok.Data;
 
 import javax.validation.constraints.*;
 
-import javax.validation.constraints.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,8 +26,8 @@ public class ComodoDto {
     @NotNull(message = "O campo nao pode ser nulo")
     @NotEmpty(message = "O campo nao pode ser vazio")
     @NotBlank(message = "O campo nao pode ser branco")
-    @Size(max = 30, message="O comprimeto do comodo nao pode exceder 30 caracteres")
-    @Pattern(regexp = "^[A-Z][a-z]+")
+    @Size(max = 30, message="O nome do comodo nao pode exceder 30 caracteres")
+    @Pattern(regexp = "^[A-Z][a-z]+", message = "A primeira letra deve ser maiuscula")
     private final String nome;
 
     /***
