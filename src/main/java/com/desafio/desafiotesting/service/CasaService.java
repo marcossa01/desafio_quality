@@ -2,9 +2,9 @@ package com.desafio.desafiotesting.service;
 
 import com.desafio.desafiotesting.domain.Casa;
 import com.desafio.desafiotesting.domain.Comodo;
-import com.desafio.desafiotesting.domain.dto.Bairro;
+import com.desafio.desafiotesting.domain.Bairro;
 import com.desafio.desafiotesting.domain.dto.CasaDto;
-import lombok.AllArgsConstructor;
+import com.desafio.desafiotesting.domain.dto.ComodoDto;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -21,7 +21,7 @@ public class CasaService {
     List<Bairro> bairros = new ArrayList<>();
 
     public List<CasaDto> findAll() {
-        return casas.stream().map(x -> new CasaDto(x.getNome(), x.getBairro())).collect(Collectors.toList());
+        return casas.stream().map(x -> new CasaDto(x.getNome(), x.getBairro(), ComodoDto.converteLista(x.getComodos()))).collect(Collectors.toList());
     }
 
     public Casa findByNome(String nome) {

@@ -1,16 +1,14 @@
 package com.desafio.desafiotesting.domain.dto;
 
-import com.desafio.desafiotesting.domain.Comodo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.List;
 
 @Data
 @AllArgsConstructor
-public class Bairro implements Serializable {
+public class BairroDto implements Serializable {
     private static final long serialVersionUID = 8960252552468131124L;
 
     private final String nome;
