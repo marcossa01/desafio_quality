@@ -34,8 +34,4 @@ public class BairroDto {
     public static List<BairroDto> converteLista(List<Bairro> bairros) {
         return bairros.stream().map(BairroDto::converte).collect(Collectors.toList());
     }
-
-    public static List<Bairro> converteListaDto(List<BairroDto> bairros) {
-        return bairros.stream().map(BairroDto::converte).collect(Collectors.toList());
-    }
 }

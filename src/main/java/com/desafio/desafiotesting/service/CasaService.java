@@ -34,7 +34,7 @@ public class CasaService {
         return areaTotal;
     }
 
-    public List<CasaDto> findAll() {
+    public List<Casa> findAll() {
         return casas.stream().map(c -> new Casa(c.getNome(), c.getBairro(), c.getComodos())).collect(Collectors.toList());
     }
 

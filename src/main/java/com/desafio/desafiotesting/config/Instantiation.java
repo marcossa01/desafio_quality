@@ -38,6 +38,7 @@ public class Instantiation implements CommandLineRunner {
         List<Comodo> c2 = new ArrayList<>(Arrays.asList(comodo4, comodo5, comodo6));
         List<Comodo> c3 = new ArrayList<>(Arrays.asList(comodo7, comodo8, comodo9));
 
+/*
         Casa casa1 = new Casa("Casa1", "QNP 28 CONJUNTO U CASA 12", c1);
         casaService.salvarCasa(casa1);
 
@@ -46,6 +47,7 @@ public class Instantiation implements CommandLineRunner {
 
         Casa casa3 = new Casa("Casa3", "SHPS 103 CONJUNTO B CASA 07", c3);
         casaService.salvarCasa(casa3);
+*/
 
     }
 }

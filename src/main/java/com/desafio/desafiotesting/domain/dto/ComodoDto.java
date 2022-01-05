@@ -44,7 +44,7 @@ public class ComodoDto {
      *  2 - Comprimento maximo de 33 metros.
      */
     @NotNull(message = "Comprimento é obrigatória")
-    @Size(max = 25, message = "Comprimento não pode ser maior que 33 m")
+    @Size(max = 33, message = "Comprimento não pode ser maior que 33 m")
     @Positive(message = "Comprimento deve ser maior que 0")
     private final Double comprimento;
 
