@@ -1,5 +1,6 @@
 package com.desafio.desafiotesting.resources;
 
+import com.desafio.desafiotesting.domain.dto.BairroDto;
 import com.desafio.desafiotesting.domain.dto.CasaDto;
 import com.desafio.desafiotesting.service.CasaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,12 @@ public class CasaResource {
     public CasaDto cadastrarCasa(@RequestBody CasaDto casa){
         casaService.salvarCasa(CasaDto.converte(casa));
         return casa;
+    }
+
+    @PostMapping("/cadastrarBairro")
+    public BairroDto cadastrarCasa(@RequestBody BairroDto bairro){
+        casaService.salvarBairro(BairroDto.converte(bairro));
+        return bairro;
     }
 
     @GetMapping
@@ -51,10 +58,10 @@ public class CasaResource {
         String maiorComodo = casaService.getMaiorComodo(nome);
         return ResponseEntity.ok(maiorComodo);
     }
+
     @GetMapping(value = "/areaComodos/{nome}")
-    public ResponseEntity<CasaDto> areaComodos(@PathVariable String nome) {
-        CasaDto casa = CasaDto.converte(casaService.findByNome(nome));
-        return ResponseEntity.ok(casa);
+    public ResponseEntity<String> areaComodos(@PathVariable String nome) {
+        return ResponseEntity.ok(casaService.getAreaComodos(nome));
     }
 
 }

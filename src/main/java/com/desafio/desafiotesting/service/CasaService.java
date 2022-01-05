@@ -18,6 +18,22 @@ public class CasaService {
     List<Casa> casas = new ArrayList<>();
     List<Bairro> bairros = new ArrayList<>();
 
+    private Bairro getBairro(String nome){
+        return bairros.stream().filter(b -> b.getNome().equals(nome)).findFirst().orElse(null);
+    }
+
+    // Calcula area do comodo
+    private double calcularAreaIndividual(Comodo comodo){
+        return comodo.getLargura() * comodo.getComprimento();
+    }
+
+    //Calcula area total do Imovel
+    private double calcularAreaTotal(Casa casa) {
+        double areaTotal = 0;
+        for (Comodo com : casa.getComodos()) areaTotal += calcularAreaIndividual(com);
+        return areaTotal;
+    }
+
     public List<Casa> findAll() {
         return casas.stream().map(x -> new Casa(x.getNome(), x.getBairro(), x.getComodos())).collect(Collectors.toList());
     }
@@ -38,7 +54,7 @@ public class CasaService {
         Casa casa = findByNome(nome);
         if (casa == null) throw new NullPointerException("Imovel inexistente.");
         double area = calcularAreaTotal(casa);
-        Bairro bairro = bairros.stream().filter(b -> b.getNome().equals(casa.getBairro())).findFirst().orElse(null);
+        Bairro bairro = getBairro(casa.getBairro());
         if (bairro == null) throw new NullPointerException("Bairro inexistente.");
         BigDecimal valorM2 = bairro.getValorMetroQuadrado();
         BigDecimal valorCasa = valorM2.multiply(new BigDecimal(area));
@@ -62,30 +78,22 @@ public class CasaService {
                 nomeComodo + " com área de " + maiorComodo + " metros quadrados.";
     }
 
+    public String getAreaComodos(String nomeDaCasa) {
+        StringBuilder areaComodos = new StringBuilder();
+        Casa casa = casas.stream().filter( im -> im.getNome().equals(nomeDaCasa)).findFirst().orElse(null);
+        if (casa == null) throw new NullPointerException("Imovel inexistente.");
+        for (Comodo com : casa.getComodos()) {
+            areaComodos.append("Comodo: ").append(com.getNome()).append(" com ")
+                    .append(calcularAreaIndividual(com)).append(" metros quadrados<br>");
+        }
+        return "A area de cada comodo da casa " + nomeDaCasa + " é: <br>" + areaComodos;
+    }
+
     public void salvarCasa(Casa casa) {
         casas.add(casa);
     }
 
-	public String getAreaComodos(String nomeDaCasa) {
-		StringBuilder areaComodos = new StringBuilder();
-		Casa casa = casas.stream().filter( im -> im.getNome().equals(nomeDaCasa)).findFirst().orElse(null);
-		if (casa == null) throw new NullPointerException("Imovel inexistente.");
-		for (Comodo com : casa.getComodos()) {
-			areaComodos.append("Comodo: ").append(com.getNome()).append(" com ")
-					.append(calcularAreaIndividual(com)).append(" metros quadrados<br>");
-		}
-		return "A area de cada comodo da casa " + nomeDaCasa + " é: <br>" + areaComodos;
-	}
-
-    // Calcula area do comodo
-    private double calcularAreaIndividual(Comodo comodo){
-        return comodo.getLargura() * comodo.getComprimento();
-    }
-
-    //Calcula area total do Imovel
-    private double calcularAreaTotal(Casa casa) {
-        double areaTotal = 0;
-        for (Comodo com : casa.getComodos()) areaTotal += calcularAreaIndividual(com);
-        return areaTotal;
+    public void salvarBairro(Bairro bairro) {
+        bairros.add(bairro);
     }
 }
