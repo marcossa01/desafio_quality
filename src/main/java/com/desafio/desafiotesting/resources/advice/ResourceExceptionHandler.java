@@ -1,4 +1,4 @@
-package com.desafio.desafiotesting.resources.exceptions;
+package com.desafio.desafiotesting.resources.advice;
 
 import com.desafio.desafiotesting.exception.RepositoryException;
 import org.springframework.http.HttpStatus;
