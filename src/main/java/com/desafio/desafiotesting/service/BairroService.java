@@ -23,6 +23,4 @@ public class BairroService {
     public void salvar(Bairro bairro) {
         bairros.add(bairro);
     }
-
-
 }

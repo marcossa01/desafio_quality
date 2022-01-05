@@ -34,7 +34,7 @@ public class BairroResource {
     public ResponseEntity<BairroDto> cadastrarCasa(@RequestBody @Valid BairroDto bairro, UriComponentsBuilder uriBuilder){
         bairroService.salvar(BairroDto.converte(bairro));
         URI uri = uriBuilder
-                .path("/{nome}")
+                .path("/bairros/{nome}")
                 .buildAndExpand(bairro.getNome())
                 .toUri();
         return ResponseEntity.created(uri).body(bairro);

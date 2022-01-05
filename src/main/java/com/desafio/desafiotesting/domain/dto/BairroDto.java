@@ -14,8 +14,8 @@ import java.util.stream.Collectors;
 public class BairroDto {
     @NotNull(message = "nome é obrigatório")
     @NotEmpty(message = "nome é obrigatório")
-    @Size(min = 3, max = 45, message = "tamanho mínimo 8, máximo 45")
-    @Pattern(regexp = "^[A-Z][a-z]+", message = "O nome do comodo deve começar com letra maiúscula")
+    @Size(min = 3, max = 45, message = "tamanho mínimo 3, máximo 45")
+    @Pattern(regexp = "^[A-Z][a-zA-Z0-9 ]+", message = "O nome do comodo deve começar com letra maiúscula")
     private final String nome;
 
     @Digits(integer = 11, fraction = 2, message = "O valor não pode ultrapassar 13 dígitos - Casas decimais não pode ultrapassar dois dígitos")
@@ -32,6 +32,10 @@ public class BairroDto {
     }
 
     public static List<BairroDto> converteLista(List<Bairro> bairros) {
+        return bairros.stream().map(BairroDto::converte).collect(Collectors.toList());
+    }
+
+    public static List<Bairro> converteListaDto(List<BairroDto> bairros) {
         return bairros.stream().map(BairroDto::converte).collect(Collectors.toList());
     }
 }
