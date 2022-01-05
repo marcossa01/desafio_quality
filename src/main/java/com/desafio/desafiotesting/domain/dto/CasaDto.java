@@ -1,12 +1,9 @@
 package com.desafio.desafiotesting.domain.dto;
 
 
-import com.desafio.desafiotesting.domain.Casa;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import javax.validation.Valid;
-import java.io.Serializable;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -26,7 +23,6 @@ public class CasaDto {
     private String bairro;
     @Valid
     @NotNull(message = "O campo comodo deve ser preenchido")
-    @Valid
     private List<ComodoDto> comodos;
 
 }
