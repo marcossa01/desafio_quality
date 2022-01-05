@@ -14,4 +14,5 @@ public class Bairro {
 
     private String nome;
     private BigDecimal valorMetroQuadrado;
+
 }
