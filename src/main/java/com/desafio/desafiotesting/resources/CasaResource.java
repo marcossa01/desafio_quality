@@ -1,5 +1,6 @@
 package com.desafio.desafiotesting.resources;
 
+import com.desafio.desafiotesting.domain.dto.BairroDto;
 import com.desafio.desafiotesting.domain.Casa;
 import com.desafio.desafiotesting.domain.dto.CasaDto;
 import com.desafio.desafiotesting.service.CasaService;
@@ -21,6 +22,12 @@ public class CasaResource {
     @PostMapping("/cadastrarCasa")
     public ResponseEntity<CasaDto> cadastrarCasa(@Valid @RequestBody CasaDto casa){
         return ResponseEntity.ok(casa);
+    }
+
+    @PostMapping("/cadastrarBairro")
+    public BairroDto cadastrarCasa(@RequestBody @Valid BairroDto bairro){
+        casaService.salvarBairro(BairroDto.converte(bairro));
+        return bairro;
     }
 
     @GetMapping
