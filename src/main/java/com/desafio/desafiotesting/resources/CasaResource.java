@@ -1,5 +1,6 @@
 package com.desafio.desafiotesting.resources;
 
+import com.desafio.desafiotesting.domain.Casa;
 import com.desafio.desafiotesting.domain.dto.CasaDto;
 import com.desafio.desafiotesting.service.CasaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +19,8 @@ public class CasaResource {
 
 
     @PostMapping("/cadastrarCasa")
-    public CasaDto cadastrarCasa(@Valid @RequestBody CasaDto casa){
-        //casaService.salvarCasa(CasaDto.converte(casa));
-        return casa;
+    public ResponseEntity<CasaDto> cadastrarCasa(@Valid @RequestBody CasaDto casa){
+        return ResponseEntity.ok(casa);
     }
 
     @GetMapping
