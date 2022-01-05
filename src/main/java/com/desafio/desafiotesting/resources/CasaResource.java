@@ -6,9 +6,7 @@ import com.desafio.desafiotesting.service.CasaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -17,6 +15,13 @@ public class CasaResource {
 
     @Autowired
     private CasaService casaService;
+
+
+    @PostMapping("/cadastrarCasa")
+    public CasaDto cadastrarCasa(@RequestBody CasaDto casa){
+        //casaService.salvarCasa(CasaDto.converte(casa));
+        return casa;
+    }
 
     @GetMapping
     public ResponseEntity<List<CasaDto>> findAll() {
@@ -36,9 +41,9 @@ public class CasaResource {
         return ResponseEntity.ok(casa);
     }
 
-    @GetMapping(value = "/{valor}/{nome}")
-    public ResponseEntity<String> valorCasa(@PathVariable Integer valor, @PathVariable String nome) {
-        String valorCasa = casaService.getValorCasa(nome, valor);
+    @GetMapping(value = "/valorCasa/{nome}")
+    public ResponseEntity<String> valorCasa(@PathVariable String nome) {
+        String valorCasa = casaService.getValorCasa(nome);
         return ResponseEntity.ok(valorCasa);
     }
 
@@ -53,10 +58,4 @@ public class CasaResource {
         return ResponseEntity.ok(casa);
     }
 
-    @PostMapping
-    public ResponseEntity<Void> insert(@RequestBody Casa casa) {
-        casa = casaService.insert(casa);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{nome}").buildAndExpand(casa.getNome()).toUri();
-        return ResponseEntity.created(uri).build();
-    }
 }

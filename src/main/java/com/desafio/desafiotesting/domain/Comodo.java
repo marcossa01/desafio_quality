@@ -1,10 +1,11 @@
 package com.desafio.desafiotesting.domain;
 
-import javax.validation.constraints.*;
-import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
-public class Comodo implements Serializable {
-    private static final long serialVersionUID = 7245102729388518152L;
+@Data
+@AllArgsConstructor
+public class Comodo  {
 
     /***
      * campo nome do comodo, retorna as validacoes solicitadas no documento fornecido
@@ -19,39 +20,9 @@ public class Comodo implements Serializable {
     @Max(value = 30, message="O comprimeto do comodo nao pode exceder 30 caracteres")
     @Pattern(regexp = "^[A-Z][a-z]+")
     private String nome;
-
-    private Double largura;
-    private Double comprimento;
-
-    public Comodo(String nome, Double largura, Double comprimento) {
-        this.nome = nome;
-        this.largura = largura;
-        this.comprimento = comprimento;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public Double getLargura() {
-        return largura;
-    }
-
-    public void setLargura(Double largura) {
-        this.largura = largura;
-    }
-
-    public Double getComprimento() {
-        return comprimento;
-    }
-
-    public void setComprimento(Double comprimento) {
-        this.comprimento = comprimento;
-    }
+    private final String nome;
+    private final Double largura;
+    private final Double comprimento;
 
     public double getAreaComodo() {
         return largura * comprimento;
