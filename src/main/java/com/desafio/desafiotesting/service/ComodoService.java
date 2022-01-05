@@ -1,6 +1,5 @@
 package com.desafio.desafiotesting.service;
 
-import com.desafio.desafiotesting.domain.Casa;
 import com.desafio.desafiotesting.domain.Comodo;
 import org.springframework.stereotype.Service;
 

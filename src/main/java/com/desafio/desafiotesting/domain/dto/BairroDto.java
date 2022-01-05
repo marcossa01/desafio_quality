@@ -1,15 +1,10 @@
 package com.desafio.desafiotesting.domain.dto;
 
 import com.desafio.desafiotesting.domain.Bairro;
-import com.desafio.desafiotesting.domain.Casa;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.hibernate.validator.constraints.Length;
-import org.springframework.validation.annotation.Validated;
 
-import javax.validation.Valid;
 import javax.validation.constraints.*;
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;

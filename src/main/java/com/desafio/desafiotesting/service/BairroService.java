@@ -1,18 +1,10 @@
 package com.desafio.desafiotesting.service;
 
 import com.desafio.desafiotesting.domain.Bairro;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.desafio.desafiotesting.domain.dto.BairroDto;
-import org.springframework.stereotype.Service;
-
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service

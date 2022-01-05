@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.validation.constraints.*;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,7 +34,7 @@ public class ComodoDto {
      *  2 - Comprimento maximo de 25 metros.
      */
     @NotNull(message = "Largura é obrigatória")
-    @Max(value = 25, message = "Largura não pode ser maior que 25 m")
+    @Size(max = 25, message = "Largura não pode ser maior que 25 m")
     @Positive(message = "Largura deve ser maior que 0")
     private final Double largura;
 
@@ -45,7 +44,7 @@ public class ComodoDto {
      *  2 - Comprimento maximo de 33 metros.
      */
     @NotNull(message = "Comprimento é obrigatória")
-    @Max(value = 25, message = "Comprimento não pode ser maior que 33 m")
+    @Size(max = 25, message = "Comprimento não pode ser maior que 33 m")
     @Positive(message = "Comprimento deve ser maior que 0")
     private final Double comprimento;
 

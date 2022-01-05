@@ -1,8 +1,9 @@
 package com.desafio.desafiotesting.service;
 
+import com.desafio.desafiotesting.domain.Bairro;
 import com.desafio.desafiotesting.domain.Casa;
 import com.desafio.desafiotesting.domain.Comodo;
-import com.desafio.desafiotesting.domain.Bairro;
+import com.desafio.desafiotesting.domain.dto.CasaDto;
 import com.desafio.desafiotesting.exception.BusinessException;
 import com.desafio.desafiotesting.exception.RepositoryException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class CasaService {
         return areaTotal;
     }
 
-    public List<Casa> findAll() {
+    public List<CasaDto> findAll() {
         return casas.stream().map(c -> new Casa(c.getNome(), c.getBairro(), c.getComodos())).collect(Collectors.toList());
     }
 
