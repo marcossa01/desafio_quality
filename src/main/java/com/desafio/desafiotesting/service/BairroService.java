@@ -1,7 +1,6 @@
 package com.desafio.desafiotesting.service;
 
 import com.desafio.desafiotesting.domain.Bairro;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -24,6 +23,4 @@ public class BairroService {
     public void salvar(Bairro bairro) {
         bairros.add(bairro);
     }
-
-
 }
