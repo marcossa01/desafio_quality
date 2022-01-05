@@ -10,8 +10,7 @@ import java.math.BigDecimal;
 
 @Data
 @AllArgsConstructor
-public class BairroDto implements Serializable {
-    private static final long serialVersionUID = 8960252552468131124L;
+public class BairroDto {
 
     private final String nome;
     private final BigDecimal valorMetroQuadrado;

@@ -3,6 +3,7 @@ package com.desafio.desafiotesting.service;
 import com.desafio.desafiotesting.domain.Casa;
 import com.desafio.desafiotesting.domain.Comodo;
 import com.desafio.desafiotesting.domain.Bairro;
+import com.desafio.desafiotesting.exception.RepositoryException;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -45,17 +46,17 @@ public class CasaService {
 
     public String getAreaCasa(String nome) {
         Casa casa = findByNome(nome);
-        if (casa == null) throw new NullPointerException("Imovel inexistente.");
+        if (casa == null) throw new RepositoryException("Casa inexistente.");
         double area = calcularAreaTotal(casa);
         return "A área total da casa é de: " + area + " metros.";
     }
 
     public String getValorCasa(String nome) {
         Casa casa = findByNome(nome);
-        if (casa == null) throw new NullPointerException("Imovel inexistente.");
+        if (casa == null) throw new RepositoryException("Casa inexistente.");
         double area = calcularAreaTotal(casa);
         Bairro bairro = getBairro(casa.getBairro());
-        if (bairro == null) throw new NullPointerException("Bairro inexistente.");
+        if (bairro == null) throw new RepositoryException("Bairro inexistente.");
         BigDecimal valorM2 = bairro.getValorMetroQuadrado();
         BigDecimal valorCasa = valorM2.multiply(new BigDecimal(area));
         return "O valor da casa é: R$" + NumberFormat.getCurrencyInstance().format(valorCasa);
@@ -63,7 +64,7 @@ public class CasaService {
 
     public String getMaiorComodo(String nome) {
         Casa casa = findByNome(nome);
-        if (casa == null) throw new NullPointerException("Imovel inexistente.");
+        if (casa == null) throw new RepositoryException("Imovel inexistente.");
         double maiorComodo = 0;
         double areaComodo;
         String nomeComodo = "";
@@ -81,7 +82,7 @@ public class CasaService {
     public String getAreaComodos(String nomeDaCasa) {
         StringBuilder areaComodos = new StringBuilder();
         Casa casa = casas.stream().filter( im -> im.getNome().equals(nomeDaCasa)).findFirst().orElse(null);
-        if (casa == null) throw new NullPointerException("Imovel inexistente.");
+        if (casa == null) throw new RepositoryException("Casa inexistente.");
         for (Comodo com : casa.getComodos()) {
             areaComodos.append("Comodo: ").append(com.getNome()).append(" com ")
                     .append(calcularAreaIndividual(com)).append(" metros quadrados<br>");
