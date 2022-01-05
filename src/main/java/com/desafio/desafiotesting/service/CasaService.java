@@ -88,7 +88,7 @@ public class CasaService {
     }
 
     public void salvarCasa(Casa casa) {
-        if(bairroService.findByNome(casa.getBairro()) == null ) throw new BusinessException("Bairro informado não existe");
+        if(bairroService.findByNome(casa.getBairro()) == null ) throw new BusinessException("Bairro não existe! Por favor cadastre o bairro correspondente");
         casas.add(casa);
     }
 

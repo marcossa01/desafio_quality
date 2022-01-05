@@ -1,5 +1,6 @@
 package com.desafio.desafiotesting.resources.exceptions;
 
+import com.desafio.desafiotesting.exception.BusinessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -14,10 +15,16 @@ public class ResourceExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<StandardError> validation(MethodArgumentNotValidException e, HttpServletRequest request) {
-        ValidationError err = new ValidationError(System.currentTimeMillis(), HttpStatus.UNPROCESSABLE_ENTITY.value(), "Erro de Validação", request.getRequestURI());
+        ValidationError err = new ValidationError(System.currentTimeMillis(), HttpStatus.UNPROCESSABLE_ENTITY.value(), "Erro de Validação", request.getRequestURI(), e.getMessage());
         for (FieldError x : e.getBindingResult().getFieldErrors()) {
             err.addError(x.getField(), x.getDefaultMessage());
         }
         return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(err);
     }
+
+    @ExceptionHandler(BusinessException.class)
+    public ResponseEntity<StandardError> validationBairro(BusinessException e, HttpServletRequest request) {
+        StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.UNPROCESSABLE_ENTITY.value(), "Erro de validação", request.getRequestURI(), e.getMessage());
+        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(err);
+    };
 }
