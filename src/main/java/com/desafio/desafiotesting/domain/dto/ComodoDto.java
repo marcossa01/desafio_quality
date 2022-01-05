@@ -23,11 +23,11 @@ public class ComodoDto {
      *  2 - Que comece com uma letra Maiuscula
      *  3 - Comprimento maximo de 30 caracteres.
      */
-    @NotNull(message = "O campo nao pode ser nulo")
-    @NotEmpty(message = "O campo nao pode ser vazio")
+    @NotNull(message = "O campo nome e obrigatorio")
     @NotBlank(message = "O campo nao pode ser branco")
-    @Max(value = 30, message="O comprimeto do comodo nao pode exceder 30 caracteres")
-    @Pattern(regexp = "^[A-Z][a-z]+")
+    @NotEmpty(message = "O campo nao pode ser vazio")
+    @Pattern(regexp = "^[A-Z][a-z]+", message = "O nome da casa deve comecar com letra maiuscula")
+    @Size(max = 30, message="O comprimeto do comodo nao pode exceder 30 caracteres")
     private final String nome;
 
     /***
