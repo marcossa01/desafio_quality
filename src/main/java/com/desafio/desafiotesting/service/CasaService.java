@@ -3,6 +3,7 @@ package com.desafio.desafiotesting.service;
 import com.desafio.desafiotesting.domain.Casa;
 import com.desafio.desafiotesting.domain.Comodo;
 import com.desafio.desafiotesting.domain.dto.CasaDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -12,6 +13,9 @@ import java.util.stream.Collectors;
 
 @Service
 public class CasaService {
+
+    @Autowired
+    private ComodoService comodoService;
 
     List<Casa> casas = new ArrayList<>();
 
@@ -59,6 +63,21 @@ public class CasaService {
         }
         return "O maior comodo da casa: " + nomeCasa;
     }
+
+    public Casa insert(Casa obj) {
+        obj.setNome(obj.getNome());
+        obj.setEndereco(obj.getEndereco());
+        for (Comodo c : obj.getComodos()) {
+            c.setNome(c.getNome());
+            c.setComprimento(c.getComprimento());
+            c.setLargura(c.getLargura());
+            comodoService.salvarComodo(c);
+        }
+        salvarCasa(obj);
+        return obj;
+    }
+
+
 
     public void salvarCasa(Casa casa) {
         casas.add(casa);
