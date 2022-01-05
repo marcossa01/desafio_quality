@@ -10,8 +10,7 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-public class Bairro implements Serializable {
-    private static final long serialVersionUID = 8960252552468131124L;
+public class Bairro {
 
     private String nome;
     private BigDecimal valorMetroQuadrado;
