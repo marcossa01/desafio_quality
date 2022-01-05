@@ -3,6 +3,8 @@ package com.desafio.desafiotesting.service;
 import com.desafio.desafiotesting.domain.Casa;
 import com.desafio.desafiotesting.domain.Comodo;
 import com.desafio.desafiotesting.domain.Bairro;
+import com.desafio.desafiotesting.domain.dto.CasaDto;
+import com.desafio.desafiotesting.domain.dto.ComodoDto;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -18,8 +20,8 @@ public class CasaService {
     List<Casa> casas = new ArrayList<>();
     List<Bairro> bairros = new ArrayList<>();
 
-    public List<Casa> findAll() {
-        return casas.stream().map(x -> new Casa(x.getNome(), x.getBairro(), x.getComodos())).collect(Collectors.toList());
+    public List<CasaDto> findAll() {
+        return casas.stream().map(x -> new CasaDto(x.getNome(), x.getBairro(), ComodoDto.converteLista(x.getComodos()))).collect(Collectors.toList());
     }
 
     public Casa findByNome(String nome) {
@@ -88,4 +90,5 @@ public class CasaService {
         for (Comodo com : casa.getComodos()) areaTotal += calcularAreaIndividual(com);
         return areaTotal;
     }
+
 }
