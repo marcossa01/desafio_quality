@@ -16,10 +16,10 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class CasaDto {
 
-    @NotNull(message = "nome é obrigatório")
-    @NotEmpty(message = "nome é obrigatório")
-    @Size(min = 8, max = 35, message = "tamanho mínimo 8, máximo 35")
-    @Pattern(regexp = "^[A-Z][a-zA-Z ]+", message = "O nome da casa deve começar com letra maiúscula")
+    @NotNull(message = "Campo obrigatório")
+    @NotEmpty(message = "Campo não pode estar em branco")
+    @Size(min = 8, max = 30, message = "tamanho min 8 e max 30")
+    @Pattern(regexp = "^[A-Z][a-zA-Z ]+", message = "Deve conter apenas letras, e primeira letra deve ser maiuscula")
     private String nome;
 
     @NotNull(message = "nome é obrigatório")
