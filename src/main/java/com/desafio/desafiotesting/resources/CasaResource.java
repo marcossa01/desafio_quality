@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
@@ -21,8 +22,13 @@ public class CasaResource {
 
 
     @PostMapping("/cadastrarCasa")
-    public ResponseEntity<CasaDto> cadastrarCasa(@Valid @RequestBody CasaDto casa){
-        return ResponseEntity.ok(casa);
+    public ResponseEntity<CasaDto> cadastrarCasa(@RequestBody @Valid  CasaDto casa, UriComponentsBuilder uriBuilder){
+        casaService.salvarCasa(CasaDto.converte(casa));
+        URI uri = uriBuilder
+                .path("/{nome}")
+                .buildAndExpand(casa.getNome())
+                .toUri();
+        return ResponseEntity.created(uri).body(casa);
     }
 
     @GetMapping
@@ -56,15 +62,8 @@ public class CasaResource {
     }
 
     @GetMapping(value = "/areaComodos/{nome}")
-    public ResponseEntity<Casa> areaComodos(@PathVariable String nome) {
-        Casa casa = casaService.findByNome(nome);
-        return ResponseEntity.ok(casa);
+    public ResponseEntity<String> areaComodos(@PathVariable String nome) {
+        return ResponseEntity.ok(casaService.getAreaComodos(nome));
     }
 
-    @PostMapping
-    public ResponseEntity<Void> insert(@RequestBody Casa casa) {
-        casaService.salvarCasa(casa);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{nome}").buildAndExpand(casa.getNome()).toUri();
-        return ResponseEntity.created(uri).build();
-    }
 }

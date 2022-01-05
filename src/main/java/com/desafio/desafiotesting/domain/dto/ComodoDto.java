@@ -20,22 +20,21 @@ public class ComodoDto {
     /***
      * campo nome do comodo, retorna as validacoes solicitadas no documento fornecido
      *  1 - Que o campo nao poder estar vazio
-     *  2 - Que comece com uma letra Maiuscula
+     *  2 - Que comece com uma letra Maiúscula
      *  3 - Comprimento maximo de 30 caracteres.
      */
-    @NotNull(message = "O campo nao pode ser nulo")
-    @NotEmpty(message = "O campo nao pode ser vazio")
+    @NotNull(message = "O campo nome e obrigatorio")
     @NotBlank(message = "O campo nao pode ser branco")
     @Size(max = 30, message="O nome do comodo nao pode exceder 30 caracteres")
     @Pattern(regexp = "^[A-Z][a-z]+", message = "O nome do comodo deve comecar com  a primeira letra maiuscula")
     private final String nome;
 
     /***
-     * campo largura do comodo, retorna as validacoes solicitadas no documento fornecido
+     * campo largura do comodo, retorna as validações solicitadas no documento fornecido
      *  1 - Que o campo nao pode estar nulo
-     *  2 - Comprimento maximo de 25 metrtos.
+     *  2 - Comprimento maximo de 25 metros.
      */
-    @NotNull(message = "Largira é obrigatória")
+    @NotNull(message = "Largura é obrigatória")
     @Max(value = 25, message = "Largura não pode ser maior que 25 m")
     @Positive(message = "Largura deve ser maior que 0")
     private final Double largura;
