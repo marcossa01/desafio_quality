@@ -5,6 +5,8 @@ import com.desafio.desafiotesting.domain.Comodo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,6 +18,8 @@ public class CasaDto implements Serializable {
 
     private String nome;
     private String bairro;
+
+    @Valid
     private List<ComodoDto> comodos;
 
     public static Casa converte(CasaDto casa) {

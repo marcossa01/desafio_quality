@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -17,9 +18,9 @@ public class CasaResource {
 
 
     @PostMapping("/cadastrarCasa")
-    public CasaDto cadastrarCasa(@RequestBody CasaDto casa){
+    public ResponseEntity<CasaDto> cadastrarCasa(@Valid @RequestBody CasaDto casa){
         casaService.salvarCasa(CasaDto.converte(casa));
-        return casa;
+        return ResponseEntity.ok(casa);
     }
 
     @GetMapping
@@ -29,30 +30,30 @@ public class CasaResource {
     }
 
     @GetMapping(value = "/{nome}")
-    public ResponseEntity<CasaDto> findByNome(@PathVariable String nome) {
+    public ResponseEntity<CasaDto> findByNome(@Valid @PathVariable String nome) {
         CasaDto casa = CasaDto.converte(casaService.findByNome(nome));
         return ResponseEntity.ok(casa);
     }
 
     @GetMapping(value = "/area/{nome}")
-    public ResponseEntity<String> areaTotal(@PathVariable String nome) {
+    public ResponseEntity<String> areaTotal(@Valid @PathVariable String nome) {
         String casa = casaService.getAreaCasa(nome);
         return ResponseEntity.ok(casa);
     }
 
     @GetMapping(value = "/valorCasa/{nome}")
-    public ResponseEntity<String> valorCasa(@PathVariable String nome) {
+    public ResponseEntity<String> valorCasa(@Valid @PathVariable String nome) {
         String valorCasa = casaService.getValorCasa(nome);
         return ResponseEntity.ok(valorCasa);
     }
 
     @GetMapping(value = "/maiorComodo/{nome}")
-    public ResponseEntity<String> maiorComodo(@PathVariable String nome){
+    public ResponseEntity<String> maiorComodo(@Valid @PathVariable String nome){
         String maiorComodo = casaService.getMaiorComodo(nome);
         return ResponseEntity.ok(maiorComodo);
     }
     @GetMapping(value = "/areaComodos/{nome}")
-    public ResponseEntity<CasaDto> areaComodos(@PathVariable String nome) {
+    public ResponseEntity<CasaDto> areaComodos(@Valid @PathVariable String nome) {
         CasaDto casa = CasaDto.converte(casaService.findByNome(nome));
         return ResponseEntity.ok(casa);
     }

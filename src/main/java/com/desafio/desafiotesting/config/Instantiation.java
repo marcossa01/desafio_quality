@@ -3,6 +3,10 @@ package com.desafio.desafiotesting.config;
 import com.desafio.desafiotesting.domain.Casa;
 import com.desafio.desafiotesting.domain.Comodo;
 import com.desafio.desafiotesting.service.CasaService;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Configuration;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
