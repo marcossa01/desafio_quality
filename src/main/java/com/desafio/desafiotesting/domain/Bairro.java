@@ -21,4 +21,5 @@ public class Bairro {
      * valor do metro quadrado
      */
     private BigDecimal valorMetroQuadrado;
+
 }
