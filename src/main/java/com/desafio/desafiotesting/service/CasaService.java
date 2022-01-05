@@ -3,6 +3,7 @@ package com.desafio.desafiotesting.service;
 import com.desafio.desafiotesting.domain.Casa;
 import com.desafio.desafiotesting.domain.Comodo;
 import com.desafio.desafiotesting.domain.Bairro;
+import com.desafio.desafiotesting.exception.BusinessException;
 import com.desafio.desafiotesting.exception.RepositoryException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -87,6 +88,7 @@ public class CasaService {
     }
 
     public void salvarCasa(Casa casa) {
+        if(bairroService.findByNome(casa.getBairro()) == null ) throw new BusinessException("Bairro informado não existe");
         casas.add(casa);
     }
 }

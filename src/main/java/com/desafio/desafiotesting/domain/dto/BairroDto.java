@@ -8,10 +8,7 @@ import org.hibernate.validator.constraints.Length;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
@@ -20,7 +17,10 @@ import java.util.stream.Collectors;
 @Data
 @AllArgsConstructor
 public class BairroDto {
-
+    @NotNull(message = "nome é obrigatório")
+    @NotEmpty(message = "nome é obrigatório")
+    @Size(min = 8, max = 45, message = "tamanho minimo 8, máximo 45")
+    @Pattern(regexp = "^[-'a-zA-ZÀ-ÖØ-öø-ÿ ]+$", message = "Apenas caracteres do alfabeto, incluindo acentos")
     private final String nome;
 
     @Digits(integer = 11, fraction = 2, message = "O valor não pode ultrapassar 13 dígitos - Casas decimais não pode ultrapassar dois dígitos")
