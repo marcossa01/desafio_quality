@@ -13,12 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 @ControllerAdvice
 public class ResourceExceptionHandler {
 
-    @ExceptionHandler(value = RepositoryException.class)
-    protected ResponseEntity<Object> handlePersistencia(RepositoryException ex) {
-        String bodyOfResponse = ex.getMessage();
-        return ResponseEntity.badRequest().body(bodyOfResponse);
-    }
-
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<StandardError> validation(MethodArgumentNotValidException e, HttpServletRequest request) {
         ValidationError err = new ValidationError(
