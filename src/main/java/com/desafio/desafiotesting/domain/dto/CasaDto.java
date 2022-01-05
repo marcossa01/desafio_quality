@@ -1,10 +1,10 @@
 package com.desafio.desafiotesting.domain.dto;
 
-import com.desafio.desafiotesting.domain.Casa;
-import com.desafio.desafiotesting.domain.Comodo;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import javax.validation.Valid;
 import java.io.Serializable;
 import java.util.List;
 
@@ -15,6 +15,7 @@ public class CasaDto implements Serializable {
 
     private String nome;
     private String bairro;
+    @Valid
     private List<ComodoDto> comodos;
 
 }
