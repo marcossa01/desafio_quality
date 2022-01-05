@@ -18,14 +18,14 @@ public class CasaDto {
 
     @NotNull(message = "nome é obrigatório")
     @NotEmpty(message = "nome é obrigatório")
-    @Size(min = 8, max = 35, message = "tamanho minimo 8, máximo 35")
-    @Pattern(regexp = "^[-'a-zA-ZÀ-ÖØ-öø-ÿ ]+$", message = "Apenas caracteres do alfabeto, incluindo acentos")
+    @Size(min = 8, max = 35, message = "tamanho mínimo 8, máximo 35")
+    @Pattern(regexp = "^[A-Z][a-zA-Z ]+", message = "O nome da casa deve começar com letra maiúscula")
     private String nome;
 
     @NotNull(message = "nome é obrigatório")
     @NotEmpty(message = "nome é obrigatório")
-    @Size(min = 8, max = 45, message = "tamanho minimo 8, máximo 55")
-    @Pattern(regexp = "^[-'a-zA-ZÀ-ÖØ-öø-ÿ ]+$", message = "Apenas caracteres do alfabeto, incluindo acentos")
+    @Size(min = 8, max = 45, message = "tamanho mínimo 8, máximo 55")
+    @Pattern(regexp = "^[A-Z][a-zA-Z ]+", message = "O nome do bairro deve começar com letra maiúscula")
     private String bairro;
 
     @Valid
