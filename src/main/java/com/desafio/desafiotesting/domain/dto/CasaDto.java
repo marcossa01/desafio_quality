@@ -1,10 +1,13 @@
 package com.desafio.desafiotesting.domain.dto;
 
 import com.desafio.desafiotesting.domain.Casa;
-import com.desafio.desafiotesting.domain.Comodo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,6 +17,10 @@ import java.util.stream.Collectors;
 public class CasaDto implements Serializable {
     private static final long serialVersionUID = 8960252552468131124L;
 
+    @NotNull(message = "Campo obrigatório")
+    @NotEmpty(message = "Campo não pode estar em branco")
+    @Size(min = 8, max = 30, message = "tamanho min 8 e max 30")
+    @Pattern(regexp = "^[A-Z][a-z]+", message = "Deve conter apenas letras, e primeira letra deve ser maiuscula")
     private String nome;
     private String bairro;
     private List<ComodoDto> comodos;
