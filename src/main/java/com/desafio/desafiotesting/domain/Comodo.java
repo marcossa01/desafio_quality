@@ -3,6 +3,8 @@ package com.desafio.desafiotesting.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import javax.validation.constraints.*;
+
 @Data
 @AllArgsConstructor
 public class Comodo  {
@@ -19,8 +21,8 @@ public class Comodo  {
     @NotBlank(message = "O campo nao pode ser branco")
     @Max(value = 30, message="O comprimeto do comodo nao pode exceder 30 caracteres")
     @Pattern(regexp = "^[A-Z][a-z]+")
-    private String nome;
     private final String nome;
+
     private final Double largura;
     private final Double comprimento;
 
