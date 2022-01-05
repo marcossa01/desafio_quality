@@ -1,36 +1,36 @@
 package com.desafio.desafiotesting.domain.dto;
 
-import java.io.Serializable;
+import com.desafio.desafiotesting.domain.Casa;
+import com.desafio.desafiotesting.domain.Comodo;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
+import java.io.Serializable;
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Data
+@AllArgsConstructor
 public class CasaDto implements Serializable {
     private static final long serialVersionUID = 8960252552468131124L;
 
     private String nome;
-    private String endereco;
+    private String bairro;
+    private List<ComodoDto> comodos;
 
-    public CasaDto(){
-
+    public static Casa converte(CasaDto casa) {
+        return new Casa(casa.getNome(), casa.getBairro(), ComodoDto.converteListaDto(casa.getComodos()));
     }
 
-    public CasaDto(String nome, String endereco) {
-        this.nome = nome;
-        this.endereco = endereco;
+    public static CasaDto converte(Casa casa) {
+        return new CasaDto(casa.getNome(), casa.getBairro(), ComodoDto.converteLista(casa.getComodos()));
     }
 
-    public String getNome() {
-        return nome;
+    public static List<Casa> converteListaDto(List<CasaDto> casas) {
+        return casas.stream().map(CasaDto::converte).collect(Collectors.toList());
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public static List<CasaDto> converteLista(List<Casa> casas) {
+        return casas.stream().map(CasaDto::converte).collect(Collectors.toList());
     }
-
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
-
 }
