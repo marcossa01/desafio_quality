@@ -5,6 +5,7 @@ import com.desafio.desafiotesting.domain.Casa;
 import com.desafio.desafiotesting.domain.Comodo;
 import com.desafio.desafiotesting.domain.dto.CasaDto;
 import com.desafio.desafiotesting.exception.BusinessException;
+import com.desafio.desafiotesting.domain.Bairro;
 import com.desafio.desafiotesting.exception.RepositoryException;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.desafio.desafiotesting.domain.Bairro;
@@ -22,21 +23,11 @@ public class CasaService {
     List<Casa> casas = new ArrayList<>();
     @Autowired
     BairroService bairroService;
-    List<Bairro> bairros = new ArrayList<>();
-
-    private Bairro getBairro(String nome){
-        return bairros.stream().filter(b -> b.getNome().equals(nome)).findFirst().orElse(null);
-    }
-
-    // Calcula area do comodo
-    private double calcularAreaIndividual(Comodo comodo) {
-        return comodo.getLargura() * comodo.getComprimento();
-    }
 
     //Calcula area total do Imovel
     private double calcularAreaTotal(Casa casa) {
         double areaTotal = 0;
-        for (Comodo com : casa.getComodos()) areaTotal += calcularAreaIndividual(com);
+        for (Comodo com : casa.getComodos()) areaTotal += com.getAreaComodo();
         return areaTotal;
     }
 
@@ -73,7 +64,7 @@ public class CasaService {
         double areaComodo;
         String nomeComodo = "";
         for (Comodo c : casa.getComodos()) {
-            areaComodo = calcularAreaIndividual(c);
+            areaComodo = c.getAreaComodo();
             if (areaComodo > maiorComodo) {
                 maiorComodo = areaComodo;
                 nomeComodo = c.getNome();
@@ -89,13 +80,13 @@ public class CasaService {
         if (casa == null) throw new RepositoryException("Casa inexistente.");
         for (Comodo com : casa.getComodos()) {
             areaComodos.append("Comodo: ").append(com.getNome()).append(" com ")
-                    .append(calcularAreaIndividual(com)).append(" metros quadrados<br>");
+                    .append(com.getAreaComodo()).append(" metros quadrados<br>");
         }
         return "A area de cada comodo da casa " + nomeDaCasa + " é: <br>" + areaComodos;
     }
 
     public void salvarCasa(Casa casa) {
-        if(bairroService.findByNome(casa.getBairro()) == null ) throw new BusinessException("Bairro informado não existe");
+        if(bairroService.findByNome(casa.getBairro()) == null ) throw new RepositoryException("Bairro informado não existe");
         casas.add(casa);
     }
 }

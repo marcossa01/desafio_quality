@@ -8,7 +8,6 @@ import java.math.BigDecimal;
 @Data
 @AllArgsConstructor
 public class Bairro {
-
-    private String nome;
-    private BigDecimal valorMetroQuadrado;
+    private final String nome;
+    private final BigDecimal valorMetroQuadrado;
 }

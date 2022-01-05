@@ -37,8 +37,8 @@ public class CasaResource {
     }
 
     @GetMapping(value = "/{nome}")
-    public ResponseEntity<Casa> findByNome(@PathVariable String nome) {
-        Casa casa = casaService.findByNome(nome);
+    public ResponseEntity<CasaDto> findByNome(@PathVariable String nome) {
+        CasaDto casa = CasaDto.converte(casaService.findByNome(nome));
         return ResponseEntity.ok(casa);
     }
 

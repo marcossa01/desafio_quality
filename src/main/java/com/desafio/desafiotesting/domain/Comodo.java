@@ -6,7 +6,6 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class Comodo  {
-
     private final String nome;
     private final Double largura;
     private final Double comprimento;
