@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -18,13 +19,13 @@ public class CasaResource {
 
 
     @PostMapping("/cadastrarCasa")
-    public CasaDto cadastrarCasa(@RequestBody CasaDto casa){
+    public CasaDto cadastrarCasa(@RequestBody @Valid  CasaDto casa){
         casaService.salvarCasa(CasaDto.converte(casa));
         return casa;
     }
 
     @PostMapping("/cadastrarBairro")
-    public BairroDto cadastrarCasa(@RequestBody BairroDto bairro){
+    public BairroDto cadastrarCasa(@RequestBody @Valid BairroDto bairro){
         casaService.salvarBairro(BairroDto.converte(bairro));
         return bairro;
     }
