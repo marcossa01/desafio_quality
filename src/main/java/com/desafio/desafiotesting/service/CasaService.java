@@ -7,6 +7,7 @@ import com.desafio.desafiotesting.domain.dto.CasaDto;
 import com.desafio.desafiotesting.exception.BusinessException;
 import com.desafio.desafiotesting.exception.RepositoryException;
 import org.springframework.beans.factory.annotation.Autowired;
+import com.desafio.desafiotesting.domain.Bairro;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -21,6 +22,11 @@ public class CasaService {
     List<Casa> casas = new ArrayList<>();
     @Autowired
     BairroService bairroService;
+    List<Bairro> bairros = new ArrayList<>();
+
+    private Bairro getBairro(String nome){
+        return bairros.stream().filter(b -> b.getNome().equals(nome)).findFirst().orElse(null);
+    }
 
     // Calcula area do comodo
     private double calcularAreaIndividual(Comodo comodo) {

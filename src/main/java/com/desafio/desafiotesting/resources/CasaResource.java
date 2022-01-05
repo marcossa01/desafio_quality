@@ -31,8 +31,8 @@ public class CasaResource {
     }
 
     @GetMapping
-    public ResponseEntity<List<Casa>> findAll() {
-        List<Casa> list = casaService.findAll();
+    public ResponseEntity<List<CasaDto>> findAll() {
+        List<CasaDto> list = CasaDto.converteLista(casaService.findAll());
         return ResponseEntity.ok(list);
     }
 
