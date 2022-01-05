@@ -3,6 +3,7 @@ package com.desafio.desafiotesting.config;
 import com.desafio.desafiotesting.domain.Casa;
 import com.desafio.desafiotesting.domain.Comodo;
 import com.desafio.desafiotesting.service.CasaService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,7 +14,8 @@ import java.util.List;
 @Configuration
 public class Instantiation implements CommandLineRunner {
 
-    private final CasaService casaService = new CasaService();
+    @Autowired
+    private CasaService casaService;
 
     @Override
     public void run(String... args) {
