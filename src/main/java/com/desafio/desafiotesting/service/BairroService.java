@@ -1,10 +1,12 @@
 package com.desafio.desafiotesting.service;
 
 import com.desafio.desafiotesting.domain.Bairro;
+import com.desafio.desafiotesting.service.exceptions.BairroNullException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -17,7 +19,8 @@ public class BairroService {
     }
 
     public Bairro findByNome(String nome) {
-        return bairros.stream().filter(b -> b.getNome().equals(nome)).findFirst().orElse(null);
+        Optional<Bairro> bairro = bairros.stream().filter(b -> b.getNome().equals(nome)).findFirst();
+        return bairro.orElseThrow(() -> new BairroNullException("Bairro não encontrado"));
     }
 
     public void salvar(Bairro bairro) {
