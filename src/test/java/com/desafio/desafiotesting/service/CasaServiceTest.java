@@ -4,6 +4,7 @@ import com.desafio.desafiotesting.domain.Casa;
 import com.desafio.desafiotesting.domain.Comodo;
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -12,16 +13,20 @@ import java.util.List;
 
 public class CasaServiceTest {
 
+    private CasaService casaService;
+
+    @Before
+    public void setup(){
+        casaService = new CasaService();
+    }
+
     @Test
     public void testAreaTotalCasa() {
         //Cenario
-        CasaService casaService = new CasaService();
-
-        List<Comodo> list = new ArrayList<>();
-        Comodo c1 = new Comodo("c1", 10.0, 5.0);
-        Comodo c2 = new Comodo("c2", 20.0, 15.0);
-        Comodo c3 = new Comodo("c3", 1.0, 30.0);
-        list.addAll(Arrays.asList(c1, c2, c3));
+        List<Comodo> list = Arrays.asList(
+                new Comodo("c1", 10.0, 5.0),
+                new Comodo("c2", 20.0, 15.0),
+                new Comodo("c3", 1.0, 30.0));
 
         Casa casaTeste = new Casa("CasaTeste", "BairroTeste", list);
         casaService.salvarCasa(casaTeste);
@@ -36,13 +41,10 @@ public class CasaServiceTest {
     @Test
     public void testMaiorComodoCasa() {
         //Cenario
-        CasaService casaService = new CasaService();
-
-        List<Comodo> list = new ArrayList<>();
-        Comodo c1 = new Comodo("c1", 10.0, 5.0);
-        Comodo c2 = new Comodo("c2", 20.0, 15.0);
-        Comodo c3 = new Comodo("c3", 1.0, 30.0);
-        list.addAll(Arrays.asList(c1, c2, c3));
+        List<Comodo> list = Arrays.asList(
+                new Comodo("c1", 10.0, 5.0),
+                new Comodo("c2", 20.0, 15.0),
+                new Comodo("c3", 1.0, 30.0));
 
         Casa casaTeste = new Casa("CasaTeste", "BairroTeste", list);
         casaService.salvarCasa(casaTeste);
@@ -58,11 +60,7 @@ public class CasaServiceTest {
     public void testeAreaComodo() {
 
         //Cenario
-        CasaService casaService = new CasaService();
-
-        List<Comodo> list = new ArrayList<>();
-        Comodo c1 = new Comodo("c1", 10.0, 5.0);
-        list.add(c1);
+        List<Comodo> list = Arrays.asList(new Comodo("c1", 10.0, 5.0));
 
         Casa casaTeste = new Casa("CasaTeste", "BairroTeste", list);
         casaService.salvarCasa(casaTeste);
