@@ -1,15 +1,10 @@
 package com.desafio.desafiotesting.domain.dto;
 
 import com.desafio.desafiotesting.domain.Bairro;
-import com.desafio.desafiotesting.domain.Casa;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.hibernate.validator.constraints.Length;
-import org.springframework.validation.annotation.Validated;
 
-import javax.validation.Valid;
 import javax.validation.constraints.*;
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,15 +12,15 @@ import java.util.stream.Collectors;
 @Data
 @AllArgsConstructor
 public class BairroDto {
-    @NotNull(message = "nome é obrigatório")
-    @NotEmpty(message = "nome é obrigatório")
-    @Size(min = 3, max = 45, message = "tamanho mínimo 3, máximo 45")
-    @Pattern(regexp = "^[A-Z][a-zA-Z0-9 ]+", message = "O nome do comodo deve começar com letra maiúscula")
+    @NotNull(message = "Nome do bairro é obrigatório")
+    @NotEmpty(message = "Nome do bairro é obrigatório")
+    @Size(min = 3, max = 45, message = "tamanho: mínimo 3, máximo 45")
+    @Pattern(regexp = "^[A-Z][a-zA-Z0-9 ]+", message = "O nome do bairro deve começar com letra maiúscula")
     private final String nome;
 
-    @Digits(integer = 11, fraction = 2, message = "O valor não pode ultrapassar 13 dígitos - Casas decimais não pode ultrapassar dois dígitos")
-    @NotNull(message = "Campo Obrigatório")
-    @Positive(message = "O campo deve ser positivo")
+    @Digits(integer = 11, fraction = 2, message = "O valor não pode ultrapassar 13 dígitos (11 inteiro e 2 decimais)")
+    @NotNull(message = "Valor do m2 é obrigatório")
+    @Positive(message = "O valor do m2 deve ser positivo")
     private final BigDecimal valorMetroQuadrado;
 
     public static Bairro converte(BairroDto bairro) {

@@ -1,6 +1,7 @@
 package com.desafio.desafiotesting.service;
 
 import com.desafio.desafiotesting.domain.Bairro;
+import com.desafio.desafiotesting.exception.RepositoryException;
 import com.desafio.desafiotesting.repository.BairroRepository;
 import org.springframework.stereotype.Service;
 
@@ -22,10 +23,18 @@ public class BairroService {
     }
 
     public Bairro findByNome(String nome) {
-        return bairroRepository.findByNome(nome);
+        Bairro bairro = bairroRepository.findByNome(nome);
+        if (bairro == null) throw new RepositoryException("Bairro inexistente.");
+        return bairro;
     }
 
     public void salvar(Bairro bairro) {
+        this.verificarBairroExistente(bairro.getNome()); // lança exceção se bairro ja existe
         bairroRepository.salvar(bairro);
+    }
+
+    private void verificarBairroExistente(String nome){
+        if ( bairroRepository.findByNome(nome) != null)
+            throw new RepositoryException("Ja existe bairro com esse nome.");
     }
 }

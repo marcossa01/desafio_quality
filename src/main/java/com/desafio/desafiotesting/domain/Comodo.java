@@ -2,15 +2,17 @@ package com.desafio.desafiotesting.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class Comodo  {
-    private final String nome;
-    private final Double largura;
-    private final Double comprimento;
+    private String nome;
+    private Double largura;
+    private Double comprimento;
 
-    public double getAreaComodo() {
+    public double calculaAreaComodo() {
         return largura * comprimento;
     }
 }

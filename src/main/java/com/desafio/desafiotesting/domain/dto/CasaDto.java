@@ -20,17 +20,17 @@ public class CasaDto {
     @NotEmpty(message = "Campo não pode estar em branco")
     @Size(min = 3, max = 30, message = "tamanho min 3 e max 30")
     @Pattern(regexp = "^[A-Z][a-zA-Z0-9 ]+", message = "Deve conter apenas letras, e primeira letra deve ser maiuscula")
-    private String nome;
+    private final String nome;
 
     @NotNull(message = "nome é obrigatório")
     @NotEmpty(message = "nome é obrigatório")
     @Size(min = 3, max = 45, message = "tamanho mínimo 3, máximo 45")
     @Pattern(regexp = "^[A-Z][a-zA-Z0-9 ]+", message = "O nome do bairro deve começar com letra maiúscula")
-    private String bairro;
+    private final String bairro;
 
     @Valid
     @NotNull(message = "aluno deve ter disciplinas")
-    private List<ComodoDto> comodos;
+    private final List<ComodoDto> comodos;
 
     public static Casa converte(CasaDto casa) {
         return new Casa(casa.getNome(), casa.getBairro(), ComodoDto.converteListaDto(casa.getComodos()));
