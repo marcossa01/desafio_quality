@@ -13,9 +13,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/***
+ * Repositório bairro
+ */
 @Repository
 public class BairroRepository {
 
+    /***
+     * lista de bairros
+     */
     List<Bairro> bairros;
     /***
      * objectMapper para utilização na manipulação do JSON
@@ -26,10 +32,18 @@ public class BairroRepository {
      */
     private final String PATH = "bairros.json";
 
+    /***
+     * construtor
+     * @param bairros lista de bairros
+     */
     public BairroRepository(List<Bairro> bairros) {
         this.bairros = bairros;
     }
 
+    /***
+     * busca todos bairros
+     * @return lista de bairros
+     */
     public List<Bairro> findAll() {
         try {
             File file = new File(PATH);
@@ -41,10 +55,19 @@ public class BairroRepository {
         }
     }
 
+    /***
+     * Busca bairro pelo nome (null se nao encontrar)
+     * @param nome nome
+     * @return bairro
+     */
     public Bairro findByNome(String nome) {
         return findAll().stream().filter(b -> b.getNome().equals(nome)).findFirst().orElse(null);
     }
 
+    /***
+     * Salva bairro (ses ja houver o mesmo bairro, lança exceção)
+     * @param bairro bairro
+     */
     public void salvar(Bairro bairro) {
         try {
             bairros = findAll();

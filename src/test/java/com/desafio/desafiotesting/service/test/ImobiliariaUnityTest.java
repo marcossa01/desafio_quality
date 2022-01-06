@@ -565,9 +565,9 @@ public class ImobiliariaUnityTest {
             violations.forEach(p -> g.append(p.getMessage()));
             System.out.println(g);
             assertTrue(violations.isEmpty());
-        } // validaçoes largura
+        } // validaçoes largura comodo
         if (true) {
-            // Valida altura = 0
+            // Valida comprimento = 0
             comodos = new ArrayList<>();
             comodoValido = new ComodoDto("Agfdtrfvd", 1.0, 0.0);
             comodos.add(comodoValido);
@@ -577,7 +577,7 @@ public class ImobiliariaUnityTest {
             violations.forEach(p -> g.append(p.getMessage()));
             System.out.println(g);
             assertFalse(violations.isEmpty());
-            // valida altura negativa
+            // valida comprimento negativa
             comodos = new ArrayList<>();
             comodoValido = new ComodoDto("Agfdtrfvd", 1.9, -1.0);
             comodos.add(comodoValido);
@@ -587,7 +587,7 @@ public class ImobiliariaUnityTest {
             violations.forEach(p -> g.append(p.getMessage()));
             System.out.println(g);
             assertFalse(violations.isEmpty());
-            // valida altura nula
+            // valida comprimento nula
             comodos = new ArrayList<>();
             comodoValido = new ComodoDto("Agfdtrfvd", 1.0, null);
             comodos.add(comodoValido);
@@ -597,7 +597,7 @@ public class ImobiliariaUnityTest {
             violations.forEach(p -> g.append(p.getMessage()));
             System.out.println(g);
             assertFalse(violations.isEmpty());
-            // valida altura maior que 33m
+            // valida comprimento maior que 33m
             comodos = new ArrayList<>();
             comodoValido = new ComodoDto("Agfdtrfvd", 6.0, 51.0);
             comodos.add(comodoValido);
@@ -607,7 +607,7 @@ public class ImobiliariaUnityTest {
             violations.forEach(p -> g.append(p.getMessage()));
             System.out.println(g);
             assertFalse(violations.isEmpty());
-            // valida altura OK
+            // valida comprimento OK
             comodos = new ArrayList<>();
             comodoValido = new ComodoDto("Agfdtrfvd", 21.9, 1.0);
             comodos.add(comodoValido);
@@ -617,6 +617,6 @@ public class ImobiliariaUnityTest {
             violations.forEach(p -> g.append(p.getMessage()));
             System.out.println(g);
             assertTrue(violations.isEmpty());
-        } // validaçoes altura
+        } // validaçoes comprimento comodo
     }
 }
