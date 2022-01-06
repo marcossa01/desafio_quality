@@ -1,6 +1,7 @@
 package com.desafio.desafiotesting.service;
 
 import com.desafio.desafiotesting.domain.Bairro;
+import com.desafio.desafiotesting.repository.BairroRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -10,17 +11,21 @@ import java.util.stream.Collectors;
 @Service
 public class BairroService {
 
-    List<Bairro> bairros = new ArrayList<>();
+    BairroRepository bairroRepository;
+
+    public BairroService(BairroRepository bairroRepository) {
+        this.bairroRepository = bairroRepository;
+    }
 
     public List<Bairro> findAll() {
-        return bairros.stream().map(b -> new Bairro(b.getNome(), b.getValorMetroQuadrado())).collect(Collectors.toList());
+        return bairroRepository.findAll();
     }
 
     public Bairro findByNome(String nome) {
-        return bairros.stream().filter(b -> b.getNome().equals(nome)).findFirst().orElse(null);
+        return bairroRepository.findByNome(nome);
     }
 
     public void salvar(Bairro bairro) {
-        bairros.add(bairro);
+        bairroRepository.salvar(bairro);
     }
 }

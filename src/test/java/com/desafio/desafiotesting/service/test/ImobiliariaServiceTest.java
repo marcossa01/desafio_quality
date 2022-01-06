@@ -1,12 +1,15 @@
 package com.desafio.desafiotesting.service.test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-import com.desafio.desafiotesting.exception.BusinessException;
+import com.desafio.desafiotesting.domain.Bairro;
+import com.desafio.desafiotesting.repository.BairroRepository;
+import com.desafio.desafiotesting.service.BairroService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+
+import java.math.BigDecimal;
 
 public class ImobiliariaServiceTest {
 /*
@@ -27,24 +30,24 @@ Se não cumprir:
 Relate a incompatibilidade com uma
 exceção.*/
 	@Test
-	public void verificaBairroExistente() {/*
+	public void verificaBairroExistente() {
 		//arrange
-		Anuncio anuncio = Anuncio.builder()
-				.codigo("MLB0988")
-				.titulo("chave inglesa")
-				.categoria("ferramentas")
-				.preco(new BigDecimal(15.00)).build();
-				
-		AnuncioRepository mock = Mockito.mock(AnuncioRepository.class);
-		Mockito.when(mock.salva(anuncio)).thenReturn(anuncio);
-		AnuncioService anuncioService = new AnuncioService(mock);
-		
+		Bairro bairroExiste = new Bairro("Este Bairro Existe", new BigDecimal(5000));
+		Bairro bairroNaoExiste = new Bairro("Este Bairro não Existe", new BigDecimal(5000));
+
+		BairroRepository mockBairroRepository = Mockito.mock(BairroRepository.class);
+		Mockito.doNothing().when(mockBairroRepository).salvar(bairroExiste);
+		Mockito.when(mockBairroRepository.findByNome(bairroExiste.getNome())).thenReturn(bairroExiste);
+		BairroService bairroService = new BairroService(mockBairroRepository);
+
 		//act
-		Anuncio anuncioRegistro = anuncioService.registrar(anuncio);
-		
+		bairroService.salvar(bairroExiste);
+
 		//assertion
-		assertEquals(anuncio.getId(), anuncioRegistro.getId());*/
+		assertEquals(bairroExiste, bairroService.findByNome(bairroExiste.getNome()));
+		assertNotEquals(bairroNaoExiste, bairroService.findByNome(bairroNaoExiste.getNome()));
 	}
+
 
 	/*
 
