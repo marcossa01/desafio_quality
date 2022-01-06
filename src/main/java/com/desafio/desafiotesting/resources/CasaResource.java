@@ -1,6 +1,5 @@
 package com.desafio.desafiotesting.resources;
 
-import com.desafio.desafiotesting.domain.dto.BairroDto;
 import com.desafio.desafiotesting.domain.dto.CasaDto;
 import com.desafio.desafiotesting.service.CasaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,7 @@ public class CasaResource {
     public ResponseEntity<CasaDto> cadastrarCasa(@RequestBody @Valid  CasaDto casa, UriComponentsBuilder uriBuilder){
         casaService.salvarCasa(CasaDto.converte(casa));
         URI uri = uriBuilder
-                .path("/{nome}")
+                .path("/casas/{nome}")
                 .buildAndExpand(casa.getNome())
                 .toUri();
         return ResponseEntity.created(uri).body(casa);
