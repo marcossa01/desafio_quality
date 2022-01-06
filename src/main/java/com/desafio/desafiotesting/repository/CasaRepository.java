@@ -9,6 +9,10 @@ import java.util.stream.Collectors;
 @Repository
 public class CasaRepository {
 
+    public CasaRepository() {
+        super();
+    }
+
     List<Casa> casas;
 
     public CasaRepository(List<Casa> casas) {

@@ -9,6 +9,10 @@ import java.util.stream.Collectors;
 @Repository
 public class BairroRepository {
 
+    public BairroRepository() {
+        super();
+    }
+
     List<Bairro> bairros;
 
     public BairroRepository(List<Bairro> bairros) {
@@ -20,7 +24,7 @@ public class BairroRepository {
     }
 
     public Bairro findByNome(String nome) {
-        return bairros.stream().filter(b -> b.getNome().equals(nome)).findFirst().orElse(null);
+        return bairros.stream().filter(b -> b.getNome().equalsIgnoreCase(nome)).findFirst().orElse(null);
     }
 
     public void salvar(Bairro bairro) {

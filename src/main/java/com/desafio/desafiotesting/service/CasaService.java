@@ -3,6 +3,7 @@ package com.desafio.desafiotesting.service;
 import com.desafio.desafiotesting.domain.Bairro;
 import com.desafio.desafiotesting.domain.Casa;
 import com.desafio.desafiotesting.domain.Comodo;
+import com.desafio.desafiotesting.exception.NullException;
 import com.desafio.desafiotesting.exception.RepositoryException;
 import com.desafio.desafiotesting.repository.CasaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.text.NumberFormat;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class CasaService {
@@ -26,7 +25,7 @@ public class CasaService {
     }
 
     //Calcula area total do Imovel
-    private double calcularAreaTotal(Casa casa) {
+    public double calcularAreaTotal(Casa casa) {
         double areaTotal = 0;
         for (Comodo com : casa.getComodos()) areaTotal += com.getAreaComodo();
         return areaTotal;
@@ -87,7 +86,9 @@ public class CasaService {
     }
 
     public void salvarCasa(Casa casa) {
-        if(bairroService.findByNome(casa.getBairro()) == null ) throw new RepositoryException("Bairro informado não existe");
+        if(casa.getBairro() == null)
+            throw new NullException("o campo bairro esta vazio");
+            bairroService.findByNome(casa.getBairro());
         casaRepository.salvar(casa);
     }
 }
