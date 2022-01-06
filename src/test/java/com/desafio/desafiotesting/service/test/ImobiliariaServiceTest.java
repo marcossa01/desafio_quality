@@ -5,22 +5,25 @@ import com.desafio.desafiotesting.domain.Casa;
 import com.desafio.desafiotesting.domain.Comodo;
 import com.desafio.desafiotesting.exception.BusinessException;
 import com.desafio.desafiotesting.exception.NullException;
+import com.desafio.desafiotesting.exception.RepositoryException;
 import com.desafio.desafiotesting.repository.BairroRepository;
 import com.desafio.desafiotesting.repository.CasaRepository;
 import com.desafio.desafiotesting.service.BairroService;
 import com.desafio.desafiotesting.service.CasaService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.util.StringUtils;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.BooleanSupplier;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ImobiliariaServiceTest {
+
+
     /*
     Verifique se o total de metros quadrados
     calculados por propriedade está correto.
@@ -36,13 +39,11 @@ public class ImobiliariaServiceTest {
         Mockito.when(mockCasaRepository.findByNome(casas.get(0).getNome())).thenReturn(casas.get(0));
         CasaService casaService = new CasaService(mockCasaRepository);
 
-        //casaService.salvarCasa(casas.get(0));
         NullException excecaoEsperada = assertThrows(
                 NullException.class,
                 () -> casaService.salvarCasa(casas.get(3))
         );
 
-        //assertion
         assertEquals(89.5,casaService.calcularAreaTotal(casas.get(0)));
         assertTrue(excecaoEsperada.getMessage().contains("o campo bairro esta vazio"));
         assertNotNull(mockCasaRepository);
@@ -64,14 +65,12 @@ public class ImobiliariaServiceTest {
 		Mockito.when(mockBairroRepository.findByNome(bairro.get(0).getNome())).thenReturn(bairro.get(0));
 		BairroService bairroService = new BairroService(mockBairroRepository);
 
-		//act
 		bairroService.salvar(bairro.get(0));
 		BusinessException excecaoEsperada = assertThrows(
 				BusinessException.class,
 				() -> bairroService.salvar(bairro.get(4))
 		);
 
-		//assertion
 		assertEquals(new Bairro("Vila velha", BigDecimal.valueOf(10000)), bairroService.findByNome(bairro.get(0).getNome()));
 		assertNotNull(bairroService);
 		assertTrue(excecaoEsperada.getMessage().contains("nao e permitido cadastrar bairro som informar dados"));
@@ -82,24 +81,22 @@ public class ImobiliariaServiceTest {
 	devolvido.
 	Retorna o cômodo com o maior tamanho*/
     @Test
-    public void verificaSeComodoMaiorEstaCorreto() {/*
-		//arrange
-		Anuncio anuncio = Anuncio.builder()
-				.codigo("MLB0988")
-				.titulo("chave inglesa")
-				.categoria("ferramentas")
-				.preco(new BigDecimal(0)).build();
+    public void verificaSeComodoMaiorEstaCorreto() {
+		List<Casa> casas = mockCasas();
 
-		AnuncioRepository mock = Mockito.mock(AnuncioRepository.class);
-		AnuncioService anuncioService = new AnuncioService(mock);
+        CasaRepository mockCasaRepository = Mockito.mock(CasaRepository.class);
+        Mockito.doNothing().when(mockCasaRepository).salvar(mockCasas().get(3));
+        Mockito.when(mockCasaRepository.findByNome(casas.get(3).getNome())).thenReturn(casas.get(3));
+        CasaService casaService = new CasaService(mockCasaRepository);
 
-	    BusinessException excecaoEsperada = assertThrows(
-	    		BusinessException.class,
-	            () -> anuncioService.registrar(anuncio) //act
-	     );
+        RepositoryException excecaoEsperada = assertThrows(
+                RepositoryException.class,
+                () -> casaService.getAreaCasa(casas.get(1).getNome())
+        );
 
-	    //assertion
-	    assertTrue(excecaoEsperada.getMessage().contains("Nao eh permitido registro de anuncio com valor zero"));*/
+        assertTrue(excecaoEsperada.getMessage().contains("Casa inexistente."));
+        assertEquals("Suite", StringUtils.capitalize("suite"), casaService.getMaiorComodo(casas.get(3).getNome()));
+        assertEquals("45.0", StringUtils.capitalize("45.0"), casaService.getMaiorComodo(casas.get(3).getNome()));
     }
 
 	/*
@@ -110,25 +107,43 @@ public class ImobiliariaServiceTest {
 	metros quadrados de um cômodo.
 	 */
     @Test
-    public void verificaTotalM2DoComodo() {/*
-		//arrange
-		Anuncio anuncio = Anuncio.builder()
-				.codigo("MLB0988")
-				.titulo("chave inglesa")
-				.categoria("ferramentas")
-				.preco(new BigDecimal(0)).build();
+    public void verificaTotalM2DoComodo() {
+		List<Casa> casas = mockCasas();
 
-		AnuncioRepository mock = Mockito.mock(AnuncioRepository.class);
-		AnuncioService anuncioService = new AnuncioService(mock);
+        CasaRepository mockCasaRepository = Mockito.mock(CasaRepository.class);
+        Mockito.doNothing().when(mockCasaRepository).salvar(mockCasas().get(3));
+        Mockito.when(mockCasaRepository.findByNome(casas.get(3).getNome())).thenReturn(casas.get(3));
+        CasaService casaService = new CasaService(mockCasaRepository);
 
-	    BusinessException excecaoEsperada = assertThrows(
-	    		BusinessException.class,
-	            () -> anuncioService.registrar(anuncio) //act
-	     );
+        RepositoryException excecaoEsperada = assertThrows(
+                RepositoryException.class,
+                () -> casaService.getMaiorComodo(null)
+        );
 
-	    //assertion
-	    assertTrue(excecaoEsperada.getMessage().contains("Nao eh permitido registro de anuncio com valor zero"));*/
+        assertTrue(excecaoEsperada.getMessage().contains("Imovel inexistente."));
+        //metros quadrados do quarto
+        assertEquals("19.5", StringUtils.capitalize("19.5"), casaService.getMaiorComodo(casas.get(3).getNome()));
+        //metros quadrados da cozinha
+        assertEquals("6.0", StringUtils.capitalize("6.0"), casaService.getMaiorComodo(casas.get(3).getNome()));
+        //metros quadrados do banheiro
+        assertEquals("4.0", StringUtils.capitalize("4.0"), casaService.getMaiorComodo(casas.get(3).getNome()));
+        //metros quadrados da sala
+        assertEquals("15.0", StringUtils.capitalize("15.0"), casaService.getMaiorComodo(casas.get(3).getNome()));
+        //metros quadrados da suite
+        assertEquals("45.0", StringUtils.capitalize("45.0"), casaService.getMaiorComodo(casas.get(3).getNome()));
+        assertNotNull(casaService.findAll());
     }
+
+
+    @Test
+    @AutoConfigureMockMvc
+    public void chamadaControllerOK(){
+
+
+    }
+
+
+
 
     public List<Bairro> mockTesteBairro() {
         List<Bairro> bairros = new ArrayList<>();
@@ -161,7 +176,7 @@ public class ImobiliariaServiceTest {
         comodos.add(comodo5);
 
         Casa casa = new Casa("casa1", "Vila velha",comodos);
-        Casa casa1 = new Casa("casa2", "Vila nova",comodos);
+        Casa casa1 = new Casa("", "Vila nova",comodos);
         Casa casa2 = new Casa("casa4", "Vila antiga",comodos);
         Casa casa3 = new Casa("casa5",null,comodos);
         casas.add(casa);
@@ -171,4 +186,5 @@ public class ImobiliariaServiceTest {
 
         return casas;
     }
+
 }
