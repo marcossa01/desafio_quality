@@ -4,6 +4,7 @@ import com.desafio.desafiotesting.domain.Bairro;
 import com.desafio.desafiotesting.domain.Casa;
 import com.desafio.desafiotesting.domain.Comodo;
 import com.desafio.desafiotesting.exception.RepositoryException;
+import com.desafio.desafiotesting.repository.CasaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,9 +17,13 @@ import java.util.stream.Collectors;
 @Service
 public class CasaService {
 
-    List<Casa> casas = new ArrayList<>();
     @Autowired
     BairroService bairroService;
+    CasaRepository casaRepository;
+
+    public CasaService(CasaRepository casaRepository) {
+        this.casaRepository = casaRepository;
+    }
 
     //Calcula area total do Imovel
     private double calcularAreaTotal(Casa casa) {
@@ -28,11 +33,11 @@ public class CasaService {
     }
 
     public List<Casa> findAll() {
-        return casas.stream().map(c -> new Casa(c.getNome(), c.getBairro(), c.getComodos())).collect(Collectors.toList());
+        return casaRepository.findAll();
     }
 
     public Casa findByNome(String nome) {
-        return casas.stream().filter(c -> c.getNome().equals(nome)).findFirst().orElse(null);
+        return casaRepository.findByNome(nome);
     }
 
     public String getAreaCasa(String nome) {
@@ -72,7 +77,7 @@ public class CasaService {
 
     public String getAreaComodos(String nomeDaCasa) {
         StringBuilder areaComodos = new StringBuilder();
-        Casa casa = casas.stream().filter(im -> im.getNome().equals(nomeDaCasa)).findFirst().orElse(null);
+        Casa casa = casaRepository.findByNome(nomeDaCasa);
         if (casa == null) throw new RepositoryException("Casa inexistente.");
         for (Comodo com : casa.getComodos()) {
             areaComodos.append("Comodo: ").append(com.getNome()).append(" com ")
@@ -83,6 +88,6 @@ public class CasaService {
 
     public void salvarCasa(Casa casa) {
         if(bairroService.findByNome(casa.getBairro()) == null ) throw new RepositoryException("Bairro informado não existe");
-        casas.add(casa);
+        casaRepository.salvar(casa);
     }
 }
