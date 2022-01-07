@@ -67,6 +67,7 @@ Campo comprimento Comodo: <br>
 #### -> [Link para importar Collection](https://www.getpostman.com/collections/4c132e593eff4288e660) para o Postman (copiar e colar)
 #### —> [Definições](https://drive.google.com/file/d/11nxa2r9uXn8GwaK1F0onKU7ZcfmGFZRD/view) a serem seguidas para completar o desafio.
 ```sh
+POST/GET base -> http://localhost:8080/bairros
 POST/GET base -> http://localhost:8080/casas
 ```
 
@@ -75,7 +76,7 @@ POST/GET base -> http://localhost:8080/casas
 <br>[Repositório Git](https://github.com/fpbontempo)
 
 <b>Fernando José Dias Netto</b>
-<br>[Repositório Git](https://github.com/netto-meli/DesafioSringWave4)
+<br>[Repositório Git](https://github.com/netto-meli)
 
 <b>Leonardo Teixeira Assunção</b>
 <br>[Repositório Git](https://github.com/LeoDevMeli)
