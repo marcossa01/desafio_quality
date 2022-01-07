@@ -70,36 +70,30 @@ public class ImobiliariaUnityTest {
      * Relate a incompatibilidade com uma exceção.
      */
     @Test
-    public void verificaBairroExistenteNaInclusaoDeCasas() {
+    public void verificaBairroExistente() {
         //arrange
-        String bairroExiste = "Este Bairro Existe";
-        String bairroNaoExiste = "Este Bairro não Existe";
-        Bairro bairro = new Bairro(bairroExiste, new BigDecimal(5000));
-        Casa casaComBairroExistente = new Casa("casa 1", bairroExiste, new ArrayList<>());
-        Casa casaComBairroInexistente = new Casa("casa 2", bairroNaoExiste, new ArrayList<>());
+        String nomeBairroExiste = "Este Bairro Existe";
+        String nomeBairroNaoExiste = "Este Bairro não Existe";
+        Bairro bairroExiste = new Bairro(nomeBairroExiste, new BigDecimal(5000));
+        Bairro bairroNaoExiste = new Bairro(nomeBairroNaoExiste, new BigDecimal(5000));
 
-        BairroService mockBairroService = Mockito.mock(BairroService.class);
-        Mockito.when(mockBairroService.findByNome(isA(String.class)))
-                .thenReturn(bairro)
-                .thenThrow( new RepositoryException("Bairro inexistente."));
+        BairroRepository mockBairroRepository = Mockito.mock(BairroRepository.class);
+        Mockito.doNothing().when(mockBairroRepository).salvar(bairroExiste);
+        Mockito.when(mockBairroRepository.findByNome(isA(String.class))).thenReturn(null,bairroExiste,bairroExiste);
 
-        CasaRepository mockCasaRepository = Mockito.mock(CasaRepository.class);
-        Mockito.doNothing().when(mockCasaRepository).salvar(casaComBairroExistente);
-        Mockito.when(mockCasaRepository.findByNome(isA(String.class))).thenReturn(null,casaComBairroExistente,casaComBairroExistente);
-
-        CasaService casaService = new CasaService(mockBairroService, mockCasaRepository);
+        BairroService bairroService = new BairroService(mockBairroRepository);
 
         //act
-        casaService.salvarCasa(casaComBairroExistente);
+        bairroService.salvar(bairroExiste);
         RepositoryException excecaoEsperada = assertThrows(
                 RepositoryException.class,
-                () -> casaService.salvarCasa(casaComBairroInexistente) //act
+                () -> bairroService.salvar(bairroNaoExiste) //act
         );
 
         //assertion
-        assertEquals(casaComBairroExistente, casaService.findByNome(casaComBairroExistente.getNome()));
-        assertTrue(excecaoEsperada.getMessage().contains("Bairro inexistente."));
-        assertNotEquals(casaComBairroInexistente, casaService.findByNome(casaComBairroInexistente.getNome()));
+        assertEquals(bairroExiste, bairroService.findByNome(bairroExiste.getNome()));
+        assertTrue(excecaoEsperada.getMessage().contains("Ja existe bairro com esse nome."));
+        assertNotEquals(bairroNaoExiste, bairroService.findByNome(bairroNaoExiste.getNome()));
     }
 
     /*** <b>US-0003:<b><br>
@@ -624,5 +618,79 @@ public class ImobiliariaUnityTest {
             System.out.println(g);
             assertTrue(violations.isEmpty());
         } // validaçoes comprimento comodo
+    }
+
+    /*** <b>US-0010:<b><br>
+     * Verifique se o bairro de entrada existe no repositório de bairros, co momento do cadastro de casa.<br>
+     * <i>Se cumprir:</i><br>
+     * Permite continuar normalmente.<br>
+     * <i>Se não cumprir:</i><br>
+     * Relate a incompatibilidade com uma exceção.
+     */
+    @Test
+    public void verificaBairroExistenteNaInclusaoDeCasas() {
+        //arrange
+        String bairroExiste = "Este Bairro Existe";
+        String bairroNaoExiste = "Este Bairro não Existe";
+        Bairro bairro = new Bairro(bairroExiste, new BigDecimal(5000));
+        Casa casaComBairroExistente = new Casa("casa 1", bairroExiste, new ArrayList<>());
+        Casa casaComBairroInexistente = new Casa("casa 2", bairroNaoExiste, new ArrayList<>());
+
+        BairroService mockBairroService = Mockito.mock(BairroService.class);
+        Mockito.when(mockBairroService.findByNome(isA(String.class)))
+                .thenReturn(bairro)
+                .thenThrow( new RepositoryException("Bairro inexistente."));
+
+        CasaRepository mockCasaRepository = Mockito.mock(CasaRepository.class);
+        Mockito.doNothing().when(mockCasaRepository).salvar(casaComBairroExistente);
+        Mockito.when(mockCasaRepository.findByNome(isA(String.class))).thenReturn(null,casaComBairroExistente,casaComBairroExistente);
+
+        CasaService casaService = new CasaService(mockBairroService, mockCasaRepository);
+
+        //act
+        casaService.salvarCasa(casaComBairroExistente);
+        RepositoryException excecaoEsperada = assertThrows(
+                RepositoryException.class,
+                () -> casaService.salvarCasa(casaComBairroInexistente) //act
+        );
+
+        //assertion
+        assertEquals(casaComBairroExistente, casaService.findByNome(casaComBairroExistente.getNome()));
+        assertTrue(excecaoEsperada.getMessage().contains("Bairro inexistente."));
+        assertNotEquals(casaComBairroInexistente, casaService.findByNome(casaComBairroInexistente.getNome()));
+    }
+
+    /*** <b>US-0011:<b><br>
+     * Verifique se a casa de entrada existe no repositório de casas.<br>
+     * <i>Se cumprir:</i><br>
+     * Permite continuar normalmente.<br>
+     * <i>Se não cumprir:</i><br>
+     * Relate a incompatibilidade com uma exceção.
+     */
+    @Test
+    public void verificaCasaExistenteNaInclusaoDeCasas() {
+        //arrange
+        Bairro bairro = new Bairro("bairro", new BigDecimal("10"));
+        Casa casaJaCadastrada = new Casa("casa existe", "bairro", new ArrayList<>());
+
+        BairroService mockBairroService = Mockito.mock(BairroService.class);
+        Mockito.when(mockBairroService.findByNome(isA(String.class)))
+                .thenReturn(bairro)
+                .thenThrow( new RepositoryException("Bairro inexistente."));
+
+        CasaRepository mockCasaRepository = Mockito.mock(CasaRepository.class);
+//        Mockito.doNothing().when(mockCasaRepository).salvar(casaComBairroExistente);
+        Mockito.when(mockCasaRepository.findByNome(isA(String.class))).thenReturn(casaJaCadastrada);
+
+        CasaService casaService = new CasaService(mockBairroService, mockCasaRepository);
+
+        //act
+        RepositoryException excecaoEsperada = assertThrows(
+                RepositoryException.class,
+                () -> casaService.salvarCasa(casaJaCadastrada) //act
+        );
+
+        //assertion
+        assertTrue(excecaoEsperada.getMessage().contains("Já existe uma casa com esse nome"));
     }
 }
