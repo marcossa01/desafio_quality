@@ -1,13 +1,16 @@
 package com.desafio.desafiotesting.service.test;
 
+import com.desafio.desafiotesting.domain.Bairro;
 import com.desafio.desafiotesting.domain.Casa;
 import com.desafio.desafiotesting.domain.Comodo;
+import com.desafio.desafiotesting.service.BairroService;
 import com.desafio.desafiotesting.service.CasaService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,10 +19,12 @@ public class ImobiliariaServiceTest {
 	@Mock
 	private CasaService service;
 
+	@Mock
+	private BairroService bairroservice;
+
 	@Spy // mock it partially
 	@InjectMocks
 	private CasaService servicerp = new CasaService();
-
 	@BeforeEach
 	public void beforeEach(){
 		MockitoAnnotations.openMocks(this);
@@ -39,32 +44,30 @@ public class ImobiliariaServiceTest {
 		Assertions.assertEquals("A área total da casa é de: 55.0 metros.", areaCasa);
 	}
 
-	/*Verifique se o bairro de entrada existe no
-repositório de bairros.
-
-Se cumprir:
-Permite continuar normalmente.
-Se não cumprir:
-Relate a incompatibilidade com uma
-exceção.*/
+	/*Verifique se o bairro de entrada existe no repositório de bairros.
+	Se cumprir:
+	Permite continuar normalmente.
+	Se não cumprir:
+	Relate a incompatibilidade com uma
+	exceção.*/
 	@Test
-	public void verificaBairroExistente() {/*
-		//arrange
-		Anuncio anuncio = Anuncio.builder()
-				.codigo("MLB0988")
-				.titulo("chave inglesa")
-				.categoria("ferramentas")
-				.preco(new BigDecimal(15.00)).build();
-				
-		AnuncioRepository mock = Mockito.mock(AnuncioRepository.class);
-		Mockito.when(mock.salva(anuncio)).thenReturn(anuncio);
-		AnuncioService anuncioService = new AnuncioService(mock);
-		
-		//act
-		Anuncio anuncioRegistro = anuncioService.registrar(anuncio);
-		
-		//assertion
-		assertEquals(anuncio.getId(), anuncioRegistro.getId());*/
+	public void verificaBairroExistenteCasoExista() {
+		Bairro bairroTeste = new Bairro("Liberdade", new BigDecimal("43"));
+		BairroService bairroService = new BairroService();
+		bairroService.salvar(bairroTeste);
+		Bairro bairroLocalizado = bairroService.findByNome("Liberdade");
+		Assertions.assertEquals("Liberdade", bairroLocalizado.getNome());
+	}
+	@Test
+	public void verificaBairroExistenteCasoNãoExista() {
+		Bairro bairroTeste = new Bairro("Liberdade", new BigDecimal("43"));
+		bairroservice.salvar(bairroTeste);
+		Mockito.when(bairroservice.findByNome(Mockito.any())).thenThrow(RuntimeException.class);
+		try {
+			bairroservice.findByNome("Liberdade");
+		} catch (Exception e) {
+			//e.printStackTrace();
+		}
 	}
 
 	/*
@@ -81,17 +84,17 @@ Retorna o cômodo com o maior tamanho*/
 				.titulo("chave inglesa")
 				.categoria("ferramentas")
 				.preco(new BigDecimal(0)).build();
-		
+
 		AnuncioRepository mock = Mockito.mock(AnuncioRepository.class);
 		AnuncioService anuncioService = new AnuncioService(mock);
-				
+
 	    BusinessException excecaoEsperada = assertThrows(
 	    		BusinessException.class,
 	            () -> anuncioService.registrar(anuncio) //act
 	     );
 
 	    //assertion
-	    assertTrue(excecaoEsperada.getMessage().contains("Nao eh permitido registro de anuncio com valor zero"));*/
+	    assertTrue(excecaoEsperada.getMessa*/
 	}
 
 	/*
