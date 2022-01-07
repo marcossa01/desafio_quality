@@ -20,9 +20,9 @@ public class ComodoDto {
 
     /***
      * campo nome do comodo, retorna as validações solicitadas no documento fornecido
-     *  1 - Que o campo nao poder estar vazio
-     *  2 - Que comece com uma letra Maiúscula
-     *  3 - Comprimento máximo de 30 caracteres.
+     *  1 — Que o campo nao poder estar vazio
+     *  2 — Que comece com uma letra Maiúscula
+     *  3 — Comprimento máximo de 30 caracteres.
      */
     @NotNull(message = "O campo nome e obrigatório")
     @NotBlank(message = "O campo nao pode ser branco")
@@ -43,8 +43,8 @@ public class ComodoDto {
 
     /***
      * campo largura do comodo, retorna as validações solicitadas no documento fornecido
-     *  1 - Que o campo nao pode estar nulo
-     *  2 - Comprimento máximo de 33 metros.
+     *  1 — Que o campo nao pode estar nulo
+     *  2 — Comprimento máximo de 33 metros.
      */
     @NotNull(message = "Comprimento é obrigatória")
     @Max(value = 33, message = "Comprimento não pode ser maior que 33 m")
