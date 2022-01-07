@@ -38,7 +38,7 @@ Campo comprimento Comodo: <br>
 1 - O campo não está vazio. <br>
 2 - Largura máxima de 33 metros. <br>
 
-## Testes Unitários
+## Testes Unitários propostos
 
 ### Situações de entrada
 ```sh
@@ -60,6 +60,51 @@ Campo comprimento Comodo: <br>
 3 - Retorna o cômodo com o maior tamanho
 
 4 - Retorna o cálculo correto do total de metros quadrados de um cômodo.
+```
+
+## Testes Unitários Feitos
+```sh
+1 - Verifica se o total de metros quadrados calculados por propriedade está correto.
+
+2 - Verifica se o bairro de entrada existe no repositório de bairros.
+
+3 - Verifica se o maior cômodo foi realmente devolvido.
+
+4 - Verifica se de fato o total de metros quadrados por cômodo está correto.
+
+5 - Verifica se de fato todas casas cadastradas estão gravadas - Bônus
+
+6 - Verifica se de fato todos os bairros cadastrados estão gravados. - Bônus
+
+7 - Verifica se o valor da casa está correto. - Bônus
+
+8 - Confirmação dos validadores de campo da classe bairro - Bonus
+
+9 - Confirmação dos validadores de campo da classe Casa e Comodo - Bonus
+```
+
+## Testes de Integração feitos - Bônus
+```sh
+1 - Cadastro de um bairro: Se bairro não existe, o cadastro é realizado.
+
+2 - Lista de Bairros cadastrados.
+
+3 - Busca de um bairro: Se bairro não existe, retorna uma exceção, Se bairro existe, ele é retornado.
+
+4 - Cadastro de uma casa: Se casa não existe, o cadastro é realizado, Se casa existe, retorna uma exceção.
+
+5 - Lista de casas.
+
+6 - Busca de uma casa: Se casa não existe, retorna uma exceção, Se casa existe, ele é retornado.
+
+7 - Busca da área total de uma casa.
+
+8 - Busca do valor de uma casa.
+
+9 - Busca do maior cômodo de uma casa.
+
+10 - Busca da área de cada cômodo de uma casa.
+
 ```
 
 ***
