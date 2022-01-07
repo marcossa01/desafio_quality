@@ -261,6 +261,9 @@ public class ImobiliariaUnityTest {
         assertEquals(result, valorDaCasa);
     }
 
+    /*** <b>US-0008:<b><br>
+     * Confirmação dos validadores de campo da classe bairro
+     */
     @Test
     public void validaCamposBairro() {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
@@ -356,6 +359,9 @@ public class ImobiliariaUnityTest {
         } // validaçoes valor metro quadrado
     }
 
+    /*** <b>US-0009:<b><br>
+     * Confirmação dos validadores de campo da classe Casa e Comodo
+     */
     @Test
     public void validaCamposCasa() {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
