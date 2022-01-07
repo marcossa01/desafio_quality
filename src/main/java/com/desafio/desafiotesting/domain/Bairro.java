@@ -1,3 +1,4 @@
+
 package com.desafio.desafiotesting.domain;
 
 import lombok.AllArgsConstructor;

@@ -24,7 +24,6 @@ public class CasaResource {
     @Autowired
     private CasaService casaService;
 
-
     /***
      * Cadastra casa
      * @param casa casa

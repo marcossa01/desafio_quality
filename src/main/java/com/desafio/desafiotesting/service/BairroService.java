@@ -1,13 +1,11 @@
 package com.desafio.desafiotesting.service;
 
 import com.desafio.desafiotesting.domain.Bairro;
-import com.desafio.desafiotesting.exception.NullException;
 import com.desafio.desafiotesting.exception.RepositoryException;
 import com.desafio.desafiotesting.repository.BairroRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 /***
@@ -31,9 +29,9 @@ public class BairroService {
     }
 
     public Bairro findByNome(String nome) {
-        if (nome == null || nome.isEmpty())
-            throw new NullException("nao e permitido cadastrar bairro com o nome em branco");
-        return bairroRepository.findByNome(nome);
+        Bairro bairro = bairroRepository.findByNome(nome);
+        if (bairro == null) throw new RepositoryException("Bairro inexistente.");
+        return bairro;
     }
 
     /***
@@ -41,8 +39,6 @@ public class BairroService {
      * @param bairro bairro
      */
     public void salvar(Bairro bairro) {
-        if (bairro.getNome() == null || bairro.getValorMetroQuadrado().compareTo(BigDecimal.ZERO) <= 0)
-            throw new NullException("nao e permitido cadastrar bairro som informar dados");
         this.verificarBairroExistente(bairro.getNome());
         bairroRepository.salvar(bairro);
     }
