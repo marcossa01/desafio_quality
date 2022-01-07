@@ -71,30 +71,17 @@ public class ImobiliariaServiceTest {
 	}
 
 	/*
-
-Verifique se o maior cômodo foi realmente
-devolvido.
-
-Retorna o cômodo com o maior tamanho*/
+	Verifique se o maior cômodo foi realmente devolvido.
+	Retorna o cômodo com o maior tamanho*/
 	@Test
-	public void verificaSeComodoMaiorEstaCorreto() {/*
-		//arrange
-		Anuncio anuncio = Anuncio.builder()
-				.codigo("MLB0988")
-				.titulo("chave inglesa")
-				.categoria("ferramentas")
-				.preco(new BigDecimal(0)).build();
-
-		AnuncioRepository mock = Mockito.mock(AnuncioRepository.class);
-		AnuncioService anuncioService = new AnuncioService(mock);
-
-	    BusinessException excecaoEsperada = assertThrows(
-	    		BusinessException.class,
-	            () -> anuncioService.registrar(anuncio) //act
-	     );
-
-	    //assertion
-	    assertTrue(excecaoEsperada.getMessa*/
+	public void verificaSeComodoMaiorEstaCorreto() {
+		Bairro bairroTeste = new Bairro("Liberdade", new BigDecimal("43"));
+		bairroservice.salvar(bairroTeste);
+		Casa casaTeste = retornaCasa();
+		Mockito.when(bairroservice.findByNome(Mockito.any())).thenReturn(bairroTeste);
+		service.salvarCasa(casaTeste);
+		String result = service.getMaiorComodo(casaTeste.getNome());
+		Assertions.assertEquals("O maior comodo da casa Casa1: Quarto com área de 25.0 metros quadrados.", result);
 	}
 
 	/*
