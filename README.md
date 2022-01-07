@@ -66,17 +66,17 @@ Campo comprimento Comodo: <br>
 ```sh
 1 - Verifica se o total de metros quadrados calculados por propriedade está correto.
 
-2 - Verifique se o bairro de entrada existe no repositório de bairros.
+2 - Verifica se o bairro de entrada existe no repositório de bairros.
 
-3 - Verifique se o maior cômodo foi realmente devolvido.
+3 - Verifica se o maior cômodo foi realmente devolvido.
 
-4 - Verifique se de fato o total de metros quadrados por cômodo está correto.
+4 - Verifica se de fato o total de metros quadrados por cômodo está correto.
 
-5 - Verifique se de fato todas casas cadastradas estão gravadas - Bônus
+5 - Verifica se de fato todas casas cadastradas estão gravadas - Bônus
 
-6 -  Verifique se de fato todos os bairros cadastrados estão gravados. - Bônus
+6 -  Verifica se de fato todos os bairros cadastrados estão gravados. - Bônus
 
-7 - Verifique se o valor da casa está correto. - Bônus
+7 - Verifica se o valor da casa está correto. - Bônus
 
 8 - Confirmação dos validadores de campo da classe bairro - Bonus
 
