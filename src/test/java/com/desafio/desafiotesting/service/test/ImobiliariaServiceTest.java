@@ -134,17 +134,6 @@ public class ImobiliariaServiceTest {
         assertNotNull(casaService.findAll());
     }
 
-
-    @Test
-    @AutoConfigureMockMvc
-    public void chamadaControllerOK(){
-
-
-    }
-
-
-
-
     public List<Bairro> mockTesteBairro() {
         List<Bairro> bairros = new ArrayList<>();
         Bairro bairro = new Bairro("Vila velha", BigDecimal.valueOf(10000));
