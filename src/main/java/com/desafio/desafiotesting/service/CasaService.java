@@ -1,8 +1,8 @@
 package com.desafio.desafiotesting.service;
 
+import com.desafio.desafiotesting.domain.Bairro;
 import com.desafio.desafiotesting.domain.Casa;
 import com.desafio.desafiotesting.domain.Comodo;
-import com.desafio.desafiotesting.domain.Bairro;
 import com.desafio.desafiotesting.exception.RepositoryException;
 import com.desafio.desafiotesting.repository.CasaRepository;
 import lombok.AllArgsConstructor;

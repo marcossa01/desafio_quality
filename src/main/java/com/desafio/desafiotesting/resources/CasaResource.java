@@ -1,6 +1,5 @@
 package com.desafio.desafiotesting.resources;
 
-import com.desafio.desafiotesting.domain.Casa;
 import com.desafio.desafiotesting.domain.dto.CasaDto;
 import com.desafio.desafiotesting.service.CasaService;
 import org.springframework.beans.factory.annotation.Autowired;

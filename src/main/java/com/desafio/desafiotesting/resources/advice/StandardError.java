@@ -1,7 +1,5 @@
 package com.desafio.desafiotesting.resources.advice;
 
-import java.io.Serializable;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
