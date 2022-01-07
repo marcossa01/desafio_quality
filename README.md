@@ -74,7 +74,7 @@ Campo comprimento Comodo: <br>
 
 5 - Verifica se de fato todas casas cadastradas estão gravadas - Bônus
 
-6 -  Verifica se de fato todos os bairros cadastrados estão gravados. - Bônus
+6 - Verifica se de fato todos os bairros cadastrados estão gravados. - Bônus
 
 7 - Verifica se o valor da casa está correto. - Bônus
 
@@ -89,7 +89,7 @@ Campo comprimento Comodo: <br>
 
 2 - Lista de Bairros cadastrados.
 
-3- Busca de um bairro: Se bairro não existe, retorna uma exceção, Se bairro existe, ele é retornado.
+3 - Busca de um bairro: Se bairro não existe, retorna uma exceção, Se bairro existe, ele é retornado.
 
 4 - Cadastro de uma casa: Se casa não existe, o cadastro é realizado, Se casa existe, retorna uma exceção.
 
