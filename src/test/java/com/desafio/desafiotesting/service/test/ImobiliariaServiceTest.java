@@ -85,33 +85,18 @@ public class ImobiliariaServiceTest {
 	}
 
 	/*
-
-Verifique se de fato o total de metros
-quadrados por cômodo está correto.
-
-Retorna o cálculo correto do total de
-metros quadrados de um cômodo.
- */
+	Verifique se de fato o total de metros 	quadrados por cômodo está correto.
+	Retorna o cálculo correto do total de 	metros quadrados de um cômodo.*/
 
 	@Test
-	public void verificaTotalM2DoComodo() {/*
-		//arrange
-		Anuncio anuncio = Anuncio.builder()
-				.codigo("MLB0988")
-				.titulo("chave inglesa")
-				.categoria("ferramentas")
-				.preco(new BigDecimal(0)).build();
-
-		AnuncioRepository mock = Mockito.mock(AnuncioRepository.class);
-		AnuncioService anuncioService = new AnuncioService(mock);
-
-	    BusinessException excecaoEsperada = assertThrows(
-	    		BusinessException.class,
-	            () -> anuncioService.registrar(anuncio) //act
-	     );
-
-	    //assertion
-	    assertTrue(excecaoEsperada.getMessage().contains("Nao eh permitido registro de anuncio com valor zero"));*/
+	public void verificaTotalM2DoComodo() {
+		Bairro bairroTeste = new Bairro("Liberdade", new BigDecimal("43"));
+		bairroservice.salvar(bairroTeste);
+		Casa casaTeste = retornaCasa();
+		Mockito.when(bairroservice.findByNome(Mockito.any())).thenReturn(bairroTeste);
+		service.salvarCasa(casaTeste);
+		String result = service.getAreaComodos(casaTeste.getNome());
+		Assertions.assertEquals("A area de cada comodo da casa Casa1 é: <br>Comodo: Cozinha com 15.0 metros quadrados<br>Comodo: Sala com 15.0 metros quadrados<br>Comodo: Quarto com 25.0 metros quadrados<br>", result);
 	}
 
 	private Casa retornaCasa(){
