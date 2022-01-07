@@ -4,25 +4,21 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+import java.math.BigDecimal;
 
-/**
- * Entidade Casa
+/***
+ * Entidade Bairro
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Casa {
+public class Bairro {
     /***
-     * nome da casa
+     * Nome do bairro
      */
     private String nome;
     /***
-     * nome do bairro
+     * valor do metro quadrado
      */
-    private String bairro;
-    /***
-     * lista de cômodos
-     */
-    private List<Comodo> comodos;
+    private BigDecimal valorMetroQuadrado;
 }

@@ -1,49 +1,30 @@
 package com.desafio.desafiotesting.domain;
 
-import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-public class Comodo implements Serializable {
-    private static final long serialVersionUID = 7245102729388518152L;
-
+/***
+ * Entidade Comodo
+ */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Comodo  {
+    /***
+     * Nome do cômodo
+     */
     private String nome;
+    /***
+     * largura
+     */
     private Double largura;
+    /***
+     * comprimento
+     */
     private Double comprimento;
 
-    public Comodo(){
-
-    }
-
-    public Comodo(String nome, Double largura, Double comprimento) {
-        this.nome = nome;
-        this.largura = largura;
-        this.comprimento = comprimento;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public Double getLargura() {
-        return largura;
-    }
-
-    public void setLargura(Double largura) {
-        this.largura = largura;
-    }
-
-    public Double getComprimento() {
-        return comprimento;
-    }
-
-    public void setComprimento(Double comprimento) {
-        this.comprimento = comprimento;
-    }
-
-    public double getAreaComodo() {
+    public double calculaAreaComodo() {
         return largura * comprimento;
     }
 }
